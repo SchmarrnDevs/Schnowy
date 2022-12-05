@@ -3,8 +3,8 @@ package dev.schmarrn.schnowy;
 import dev.schmarrn.schnowy.common.SnowLayerBreaking;
 import dev.schmarrn.schnowy.common.enchantments.Enchantments;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
-import net.minecraft.util.Identifier;
-import net.minecraft.world.biome.Biome;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.biome.Biome;
 import org.quiltmc.loader.api.ModContainer;
 import org.quiltmc.qsl.base.api.entrypoint.ModInitializer;
 import org.quiltmc.qsl.worldgen.biome.api.BiomeModifications;
@@ -28,7 +28,7 @@ public class Schnowy implements ModInitializer {
 		PlayerBlockBreakEvents.AFTER.register(new SnowLayerBreaking());
 
 		// Only the Nether shall not have the snow
-		BiomeModifications.create(new Identifier("schnowy", "everywhere"))
+		BiomeModifications.create(new ResourceLocation("schnowy", "everywhere"))
 				.add(
 						ModificationPhase.POST_PROCESSING,
 						selectionContext -> !BiomeSelectors.foundInTheNether().test(selectionContext),

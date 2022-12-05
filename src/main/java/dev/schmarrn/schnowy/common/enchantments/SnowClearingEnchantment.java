@@ -1,19 +1,19 @@
 package dev.schmarrn.schnowy.common.enchantments;
 
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentTarget;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ShovelItem;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ShovelItem;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentCategory;
 
-public class SnowClearingEnchantment extends Enchantment {
+public class SnowClearingEnchantment extends Enchantment  {
 	protected SnowClearingEnchantment() {
-		super(Rarity.UNCOMMON, EnchantmentTarget.DIGGER, new EquipmentSlot[]{EquipmentSlot.MAINHAND});
+		super(Rarity.UNCOMMON, EnchantmentCategory.DIGGER, new EquipmentSlot[]{EquipmentSlot.MAINHAND});
 	}
 
 	@Override
-	public boolean isAcceptableItem(ItemStack stack) {
-		return stack.getItem() instanceof ShovelItem;
+	public boolean canEnchant(ItemStack stack) {
+		return stack.getItem() instanceof ShovelItem ;
 	}
 
 	@Override
