@@ -8,12 +8,16 @@ import net.minecraft.world.LightType;
 import net.minecraft.world.WorldView;
 import net.minecraft.world.biome.Biome;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Biome.class)
-public class InfiniteSnow {
+public abstract class InfiniteSnow {
+	@Shadow
+	public abstract Biome.Precipitation getPrecipitation();
+
 	@Inject(method = "canSetSnow", at = @At("HEAD"), cancellable = true)
 	public void schnowy$canSetSnow(WorldView world, BlockPos blockPos, CallbackInfoReturnable<Boolean> cir) {
 		Biome biome = (Biome) (Object) this;
@@ -23,6 +27,7 @@ public class InfiniteSnow {
 		} else {
 			if (blockPos.getY() >= world.getBottomY() && blockPos.getY() < world.getTopY() && world.getLightLevel(LightType.BLOCK, blockPos) < 10) {
 				BlockState blockState = world.getBlockState(blockPos);
+				// TODO: replace with simpler mixin v-- the or-ed boolean here is the important part, everything else is the same in the original fn.
 				if ((blockState.isAir() || blockState.contains(SnowBlock.LAYERS)) && Blocks.SNOW.getDefaultState().canPlaceAt(world, blockPos)) {
 					cir.setReturnValue(true);
 				} else {
@@ -32,5 +37,11 @@ public class InfiniteSnow {
 				cir.setReturnValue(false);
 			}
 		}
+	}
+
+	@Inject(method = "doesNotSnow", at = @At("HEAD"), cancellable = true)
+	public void schnowy$doesNotSnow(BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
+		// Let there be snow in ALL BIOMES except those that don't have snow (Nether for Example)
+		cir.setReturnValue(!getPrecipitation().equals(Biome.Precipitation.SNOW));
 	}
 }
