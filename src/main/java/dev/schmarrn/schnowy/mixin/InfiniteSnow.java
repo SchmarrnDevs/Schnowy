@@ -8,12 +8,16 @@ import net.minecraft.world.LightType;
 import net.minecraft.world.WorldView;
 import net.minecraft.world.biome.Biome;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Biome.class)
-public class InfiniteSnow {
+public abstract class InfiniteSnow {
+	@Shadow
+	public abstract Biome.Precipitation getPrecipitation();
+
 	@Inject(method = "canSetSnow", at = @At("HEAD"), cancellable = true)
 	public void schnowy$canSetSnow(WorldView world, BlockPos blockPos, CallbackInfoReturnable<Boolean> cir) {
 		Biome biome = (Biome) (Object) this;
@@ -37,13 +41,7 @@ public class InfiniteSnow {
 
 	@Inject(method = "doesNotSnow", at = @At("HEAD"), cancellable = true)
 	public void schnowy$doesNotSnow(BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
-		// Let there be snow in ALL BIOMES.
-		cir.setReturnValue(false);
-	}
-
-	@Inject(method = "getPrecipitation", at = @At("HEAD"), cancellable = true)
-	public void schnowy$getPrecipitation(CallbackInfoReturnable<Biome.Precipitation> cir) {
-		// Snow should also be rendered in biomes where there wouldn't be snow normally (desert, savanna)
-		cir.setReturnValue(Biome.Precipitation.SNOW);
+		// Let there be snow in ALL BIOMES except those that don't have snow (Nether for Example)
+		cir.setReturnValue(!getPrecipitation().equals(Biome.Precipitation.SNOW));
 	}
 }
