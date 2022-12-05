@@ -1,6 +1,8 @@
 package dev.schmarrn.schnowy;
 
-import net.minecraft.block.SnowBlock;
+import dev.schmarrn.schnowy.common.SnowLayerBreaking;
+import dev.schmarrn.schnowy.common.enchantments.Enchantments;
+import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import org.quiltmc.loader.api.ModContainer;
 import org.quiltmc.qsl.base.api.entrypoint.ModInitializer;
 import org.slf4j.Logger;
@@ -12,8 +14,12 @@ public class Schnowy implements ModInitializer {
 	// That way, it's clear which mod wrote info, warnings, and errors.
 	public static final Logger LOGGER = LoggerFactory.getLogger("Schnowy");
 
+	public static String MODID = "";
 	@Override
 	public void onInitialize(ModContainer mod) {
 		LOGGER.info("Hello Quilt world from {}!", mod.metadata().name());
+		MODID = mod.metadata().id();
+		Enchantments.init();
+		PlayerBlockBreakEvents.AFTER.register(new SnowLayerBreaking());
 	}
 }

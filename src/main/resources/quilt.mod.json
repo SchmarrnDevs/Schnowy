@@ -19,7 +19,8 @@
 		},
 		"intermediate_mappings": "net.fabricmc:intermediary",
 		"entrypoints": {
-			"init": "dev.schmarrn.schnowy.Schnowy"
+			"init": "dev.schmarrn.schnowy.Schnowy",
+			"fabric-datagen": "dev.schmarrn.schnowy.datagen.SchnowyDatagenEntry"
 		},
 		"depends": [
 			{

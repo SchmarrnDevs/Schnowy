@@ -62,7 +62,31 @@ java {
 	// Uncomment this line to generate them.
 	// withJavadocJar()
 }
+loom {
+	runs {
+		// This adds a new gradle task that runs the datagen API: "gradlew runDatagenClient"
+		datagenClient {
+			inherit client
+			name "Data Generation"
+			vmArg "-Dfabric-api.datagen"
+			vmArg "-Dfabric-api.datagen.output-dir=${file("src/main/generated")}"
+			vmArg "-Dfabric-api.datagen.modid=schnowy"
 
+			runDir "build/datagen"
+		}
+	}
+}
+
+// Add the datagenned files into the jar.
+sourceSets {
+	main {
+		resources {
+			srcDirs += [
+					'src/main/generated'
+			]
+		}
+	}
+}
 jar {
 	filesMatching('LICENSE') {
 		rename '^(LICENSE.*?)(\\..*)?$', "\$1_${archivesBaseName}\$2"

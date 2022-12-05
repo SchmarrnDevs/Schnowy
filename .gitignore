@@ -32,3 +32,4 @@ workspace/
 
 # macOS
 *.DS_Store
+src/main/generated/.cache/89b86ab0e66f527166d98df92ddbcf5416ed58f6
