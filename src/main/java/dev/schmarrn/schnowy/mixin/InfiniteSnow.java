@@ -23,6 +23,7 @@ public class InfiniteSnow {
 		} else {
 			if (blockPos.getY() >= world.getBottomY() && blockPos.getY() < world.getTopY() && world.getLightLevel(LightType.BLOCK, blockPos) < 10) {
 				BlockState blockState = world.getBlockState(blockPos);
+				// TODO: replace with simpler mixin v-- the or-ed boolean here is the important part, everything else is the same in the original fn.
 				if ((blockState.isAir() || blockState.contains(SnowBlock.LAYERS)) && Blocks.SNOW.getDefaultState().canPlaceAt(world, blockPos)) {
 					cir.setReturnValue(true);
 				} else {
@@ -32,5 +33,17 @@ public class InfiniteSnow {
 				cir.setReturnValue(false);
 			}
 		}
+	}
+
+	@Inject(method = "doesNotSnow", at = @At("HEAD"), cancellable = true)
+	public void schnowy$doesNotSnow(BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
+		// Let there be snow in ALL BIOMES.
+		cir.setReturnValue(false);
+	}
+
+	@Inject(method = "getPrecipitation", at = @At("HEAD"), cancellable = true)
+	public void schnowy$getPrecipitation(CallbackInfoReturnable<Biome.Precipitation> cir) {
+		// Snow should also be rendered in biomes where there wouldn't be snow normally (desert, savanna)
+		cir.setReturnValue(Biome.Precipitation.SNOW);
 	}
 }
