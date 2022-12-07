@@ -1,15 +1,10 @@
 package dev.schmarrn.schnowy.mixin;
 
-import dev.schmarrn.schnowy.Schnowy;
 import dev.schmarrn.schnowy.SchnowyUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.SnowLayerBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArgs;
 import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
@@ -29,7 +24,7 @@ public abstract class ServerLevelMixin {
 		BlockPos pos = args.get(0);
 		BlockState state = world.getBlockState(pos);
 
-		SchnowyUtils.SnowPlacementInfo info = SchnowyUtils.getSnowAbove(world, pos, state, 0);
+		SchnowyUtils.SnowPlacementInfo info = SchnowyUtils.getNewSnow(world, pos, state);
 
 		args.set(0, info.pos());
 		args.set(1, info.state());

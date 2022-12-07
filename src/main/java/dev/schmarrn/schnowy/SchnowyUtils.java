@@ -2,23 +2,34 @@ package dev.schmarrn.schnowy;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.block.AirBlock;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SnowLayerBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class SchnowyUtils {
-	public static SnowPlacementInfo getSnowAbove(ServerLevel level, BlockPos pos, BlockState state, int iteration) {
-		// TODO: Get the blocks below it to determine whether it should accumulate more snow or not
-		//       also: Put powder snow and packed ice generation in here.
-		//       Maybe: Remove the boolean and make it an option, or just keep it
-		if (state.hasProperty(SnowLayerBlock.LAYERS) && state.getValue(SnowLayerBlock.LAYERS) < 8) {
-			// If we got Layers, but aren't full, increment them
+	public static SnowPlacementInfo getNewSnow(ServerLevel level, BlockPos pos, BlockState state) {
+		// snow should only accumulate if the block below is no powder snow
+		boolean canAccumulate = !level.getBlockState(pos.below()).is(Blocks.POWDER_SNOW);
+
+		// for now: doesn't work because powder snow doesn't trigger snow accumulation
+		//if (level.getBlockState(pos.below(4)).is(Blocks.SNOW_BLOCK)) {
+		//	return new SnowPlacementInfo(Blocks.PACKED_ICE.defaultBlockState(), pos.below(4), true);
+		//}
+		// stacking snow
+		if (canAccumulate && state.hasProperty(SnowLayerBlock.LAYERS)) {
+			// If we got Layers, increment them - if full, make it a snow block or powder snow if high enough
 			int newLayerCount = state.getValue(SnowLayerBlock.LAYERS) + 1;
-			return new SnowPlacementInfo(state.setValue(SnowLayerBlock.LAYERS, newLayerCount), pos, true);
-		} else {
-			return new SnowPlacementInfo(Blocks.SNOW.defaultBlockState(), pos, true);
+			if (newLayerCount < 8) {
+				return new SnowPlacementInfo(state.setValue(SnowLayerBlock.LAYERS, newLayerCount), pos);
+			} else if (level.getBlockState(pos.below(3)).is(Blocks.SNOW_BLOCK) || level.getBlockState(pos.below()).is(BlockTags.LEAVES)) {
+				return new SnowPlacementInfo(Blocks.POWDER_SNOW.defaultBlockState(), pos);
+			}
 		}
+
+		return new SnowPlacementInfo(Blocks.SNOW.defaultBlockState(), pos);
 	}
-	public record SnowPlacementInfo(BlockState state, BlockPos pos, boolean valid) {
+	public record SnowPlacementInfo(BlockState state, BlockPos pos) {
 	}
 }
