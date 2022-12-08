@@ -68,18 +68,6 @@ public class SnowedFlower extends FlowerBlock {
 	public float getShadeBrightness(BlockState state, BlockGetter world, BlockPos pos) {
 		return state.getValue(BlockStateProperties.LAYERS) == 8 ? 0.2F : 1.0F;
 	}
-	@Override
-	public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-		if (player.getItemInHand(hand).is(Items.SNOW)) {
-			int layers = state.getValue(BlockStateProperties.LAYERS);
-			if (layers < 8) {
-				player.getItemInHand(hand).shrink(1);
-				world.setBlockAndUpdate(pos, state.setValue(BlockStateProperties.LAYERS, layers + 1));
-				return InteractionResult.sidedSuccess(world.isClientSide());
-			}
-		}
-		return super.use(state, world, pos, player, hand, hit);
-	}
 
 	@Override
 	public boolean propagatesSkylightDown(BlockState state, BlockGetter world, BlockPos pos) {

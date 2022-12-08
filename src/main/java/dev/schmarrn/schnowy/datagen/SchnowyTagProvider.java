@@ -16,6 +16,7 @@ public class SchnowyTagProvider extends FabricTagProvider.BlockTagProvider {
 	protected void generateTags() {
 		tag(BlockTags.MINEABLE_WITH_SHOVEL)
 				.add(SchnowyBlocks.FLOWERS.values().toArray(Block[]::new))
-				.add(SchnowyBlocks.SLABS.values().toArray(Block[]::new));
+				.add(SchnowyBlocks.SLABS.values().toArray(Block[]::new))
+				.add(SchnowyBlocks.SNOWED_GRASS);
 	}
 }
