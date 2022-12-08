@@ -38,10 +38,4 @@ public abstract class BiomeMixin {
 			}
 		}
 	}
-
-	@Inject(method = "warmEnoughToRain", at = @At("HEAD"), cancellable = true)
-	public void schnowy$warmEnoughToRain(BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
-		// Let there be snow in ALL BIOMES except those that don't have snow (Nether for Example)
-		cir.setReturnValue(!getPrecipitation().equals(Biome.Precipitation.SNOW));
-	}
 }
