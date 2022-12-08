@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "half_layers=1": {
+      "model": "schnowy:block/snowed_polished_diorite_slab1"
+    },
+    "half_layers=2": {
+      "model": "schnowy:block/snowed_polished_diorite_slab2"
+    },
+    "half_layers=3": {
+      "model": "schnowy:block/snowed_polished_diorite_slab3"
+    },
+    "half_layers=4": {
+      "model": "schnowy:block/snowed_polished_diorite_slab4"
+    }
+  }
+}

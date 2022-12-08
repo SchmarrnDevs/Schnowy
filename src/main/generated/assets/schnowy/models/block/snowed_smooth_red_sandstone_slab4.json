@@ -1,0 +1,7 @@
+{
+  "parent": "schnowy:block/lowerslab4",
+  "textures": {
+    "bottom": "minecraft:block/red_sandstone_top",
+    "side": "minecraft:block/red_sandstone_top"
+  }
+}

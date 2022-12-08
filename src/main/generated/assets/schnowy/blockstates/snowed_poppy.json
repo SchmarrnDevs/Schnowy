@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "layers=1": {
+      "model": "schnowy:block/snowed_poppy1"
+    },
+    "layers=2": {
+      "model": "schnowy:block/snowed_poppy2"
+    },
+    "layers=3": {
+      "model": "schnowy:block/snowed_poppy3"
+    },
+    "layers=4": {
+      "model": "schnowy:block/snowed_poppy4"
+    },
+    "layers=5": {
+      "model": "schnowy:block/snowed_poppy5"
+    },
+    "layers=6": {
+      "model": "schnowy:block/snowed_poppy6"
+    },
+    "layers=7": {
+      "model": "schnowy:block/snowed_poppy7"
+    },
+    "layers=8": {
+      "model": "schnowy:block/snowed_poppy8"
+    }
+  }
+}

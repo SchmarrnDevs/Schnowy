@@ -1,0 +1,33 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"textures": {
+        "snow": "minecraft:block/snow"
+	},
+	"elements": [
+		{
+			"name": "slab",
+			"from": [0, 0, 0],
+			"to": [16, 8, 16],
+			"faces": {
+				"north": {"uv": [0, 8, 16, 16], "texture": "#side"},
+				"east": {"uv": [0, 8, 16, 16], "texture": "#side"},
+				"south": {"uv": [0, 8, 16, 16], "texture": "#side"},
+				"west": {"uv": [0, 8, 16, 16], "texture": "#side"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#bottom"}
+			}
+		},
+		{
+			"name": "snow",
+			"from": [0, 8, 0],
+			"to": [16, 10, 16],
+			"faces": {
+				"north": {"uv": [0, 0, 16, 2], "texture": "#snow"},
+				"east": {"uv": [0, 0, 16, 2], "texture": "#snow"},
+				"south": {"uv": [0, 0, 16, 2], "texture": "#snow"},
+				"west": {"uv": [0, 0, 16, 2], "texture": "#snow"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#snow"}
+			}
+		}
+	]
+}

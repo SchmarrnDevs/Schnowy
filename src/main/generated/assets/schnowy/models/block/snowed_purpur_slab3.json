@@ -1,0 +1,7 @@
+{
+  "parent": "schnowy:block/lowerslab3",
+  "textures": {
+    "bottom": "minecraft:block/purpur_block",
+    "side": "minecraft:block/purpur_block"
+  }
+}

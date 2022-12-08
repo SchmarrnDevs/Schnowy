@@ -1,0 +1,6 @@
+{
+  "parent": "schnowy:block/cross5",
+  "textures": {
+    "cross": "minecraft:block/white_tulip"
+  }
+}

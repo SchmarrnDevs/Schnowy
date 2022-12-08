@@ -1,0 +1,6 @@
+{
+  "parent": "schnowy:block/cross8",
+  "textures": {
+    "cross": "minecraft:block/azure_bluet"
+  }
+}

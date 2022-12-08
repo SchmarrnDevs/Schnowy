@@ -20,6 +20,7 @@
 		"intermediate_mappings": "net.fabricmc:intermediary",
 		"entrypoints": {
 			"init": "dev.schmarrn.schnowy.Schnowy",
+			"client_init": "dev.schmarrn.schnowy.client.SchnowyClient",
 			"fabric-datagen": "dev.schmarrn.schnowy.datagen.SchnowyDatagenEntry"
 		},
 		"depends": [
@@ -37,5 +38,6 @@
 			}
 		]
 	},
-	"mixin": "schnowy.mixins.json"
+	"mixin": "schnowy.mixins.json",
+	"access_widener": "schnowy.accesswidener"
 }

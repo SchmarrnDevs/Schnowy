@@ -1,0 +1,7 @@
+{
+  "parent": "schnowy:block/lowerslab1",
+  "textures": {
+    "bottom": "minecraft:block/mossy_stone_bricks",
+    "side": "minecraft:block/mossy_stone_bricks"
+  }
+}
