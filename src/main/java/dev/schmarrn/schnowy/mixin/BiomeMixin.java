@@ -8,15 +8,12 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SnowLayerBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Biome.class)
 public abstract class BiomeMixin {
-	@Shadow
-	public abstract Biome.Precipitation getPrecipitation();
 
 	@Inject(method = "shouldSnow", at = @At("HEAD"), cancellable = true)
 	public void schnowy$shouldSnow(LevelReader world, BlockPos blockPos, CallbackInfoReturnable<Boolean> cir) {
