@@ -61,6 +61,9 @@ java {
 	// withJavadocJar()
 }
 loom {
+
+	accessWidenerPath = file("src/main/resources/schnowy.accesswidener")
+
 	runs {
 		// This adds a new gradle task that runs the datagen API: "gradlew runDatagenClient"
 		datagenClient {

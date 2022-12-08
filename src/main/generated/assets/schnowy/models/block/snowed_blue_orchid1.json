@@ -1,0 +1,6 @@
+{
+  "parent": "schnowy:block/cross1",
+  "textures": {
+    "cross": "minecraft:block/blue_orchid"
+  }
+}

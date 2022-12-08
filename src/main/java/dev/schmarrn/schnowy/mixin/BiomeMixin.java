@@ -1,5 +1,7 @@
 package dev.schmarrn.schnowy.mixin;
 
+import dev.schmarrn.schnowy.common.ReplaceableBlocks;
+import dev.schmarrn.schnowy.common.blocks.SchnowyProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.LightLayer;
@@ -28,7 +30,11 @@ public abstract class BiomeMixin {
 			if (blockPos.getY() >= world.getMinBuildHeight() && blockPos.getY() < world.getMaxBuildHeight() && world.getBrightness(LightLayer.BLOCK, blockPos) < 10) {
 				BlockState blockState = world.getBlockState(blockPos);
 				// TODO: replace with simpler mixin v-- the or-ed boolean here is the important part, everything else is the same in the original fn.
-				if ((blockState.isAir() || blockState.hasProperty(SnowLayerBlock.LAYERS)) && Blocks.SNOW.defaultBlockState().canSurvive(world, blockPos)) {
+				if ((blockState.isAir() || blockState.hasProperty(SnowLayerBlock.LAYERS) || blockState.hasProperty(SchnowyProperties.HALF_LAYERS) || ReplaceableBlocks.withSnow(blockState) != null) && Blocks.SNOW.defaultBlockState().canSurvive(world, blockPos)) {
+					cir.setReturnValue(true);
+				}
+				blockState = world.getBlockState(blockPos.below());
+				if (blockState.hasProperty(SnowLayerBlock.LAYERS) || blockState.hasProperty(SchnowyProperties.HALF_LAYERS) || ReplaceableBlocks.withSnow(blockState) != null) {
 					cir.setReturnValue(true);
 				} else {
 					cir.setReturnValue(false);

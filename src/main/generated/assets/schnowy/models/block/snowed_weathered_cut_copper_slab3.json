@@ -1,0 +1,7 @@
+{
+  "parent": "schnowy:block/lowerslab3",
+  "textures": {
+    "bottom": "minecraft:block/weathered_cut_copper",
+    "side": "minecraft:block/weathered_cut_copper"
+  }
+}

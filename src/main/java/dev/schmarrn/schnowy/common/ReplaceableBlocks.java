@@ -1,5 +1,6 @@
 package dev.schmarrn.schnowy.common;
 
+import dev.schmarrn.schnowy.common.blocks.SchnowyBlocks;
 import net.minecraft.Util;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -12,13 +13,14 @@ import java.util.List;
 public class ReplaceableBlocks {
 	public static final List<Replacement> BLOCKS = Util.make(() -> {
 		List<Replacement> blocks = new ArrayList<>();
-		//TODO: Fill with blocks;
+		SchnowyBlocks.SLABS.forEach((emptySlab, snowedSlab) -> blocks.add(new Replacement(emptySlab, snowedSlab)));
+		SchnowyBlocks.FLOWERS.forEach((emptySlab, snowedSlab) -> blocks.add(new Replacement(emptySlab, snowedSlab)));
 		return blocks;
 	});
 
 	@Nullable
 	public static BlockState withSnow(BlockState state) {
-		Block block = ReplaceableBlocks.BLOCKS.stream().filter(replacement -> state.is(replacement.withSnow())).findFirst().map(Replacement::withSnow).orElse(null);
+		Block block = ReplaceableBlocks.BLOCKS.stream().filter(replacement -> state.is(replacement.withoutSnow())).findFirst().map(Replacement::withSnow).orElse(null);
 		if (block != null) {
 			BlockState without = block.defaultBlockState();
 			for (Property<?> prop: state.getProperties()) {

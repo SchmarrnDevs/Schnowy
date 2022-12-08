@@ -1,0 +1,6 @@
+{
+  "parent": "schnowy:block/cross1",
+  "textures": {
+    "cross": "minecraft:block/lily_of_the_valley"
+  }
+}

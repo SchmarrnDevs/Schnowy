@@ -1,0 +1,6 @@
+{
+  "parent": "schnowy:block/cross3",
+  "textures": {
+    "cross": "minecraft:block/allium"
+  }
+}

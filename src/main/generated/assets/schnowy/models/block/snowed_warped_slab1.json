@@ -1,0 +1,7 @@
+{
+  "parent": "schnowy:block/lowerslab1",
+  "textures": {
+    "bottom": "minecraft:block/warped_planks",
+    "side": "minecraft:block/warped_planks"
+  }
+}

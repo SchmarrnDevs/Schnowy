@@ -1,0 +1,6 @@
+{
+  "parent": "schnowy:block/tinted_cross1",
+  "textures": {
+    "cross": "minecraft:block/grass"
+  }
+}

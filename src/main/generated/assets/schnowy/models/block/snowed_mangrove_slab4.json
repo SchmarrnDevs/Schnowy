@@ -1,0 +1,7 @@
+{
+  "parent": "schnowy:block/lowerslab4",
+  "textures": {
+    "bottom": "minecraft:block/mangrove_planks",
+    "side": "minecraft:block/mangrove_planks"
+  }
+}

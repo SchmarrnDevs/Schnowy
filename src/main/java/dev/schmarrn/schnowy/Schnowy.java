@@ -1,6 +1,7 @@
 package dev.schmarrn.schnowy;
 
-import dev.schmarrn.schnowy.common.SnowLayerBreaking;
+import dev.schmarrn.schnowy.common.SnowLayerInteractionEvents;
+import dev.schmarrn.schnowy.common.blocks.SchnowyBlocks;
 import dev.schmarrn.schnowy.common.enchantments.Enchantments;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.minecraft.resources.ResourceLocation;
@@ -25,7 +26,8 @@ public class Schnowy implements ModInitializer {
 		LOGGER.info("Hello Quilt world from {}!", mod.metadata().name());
 		MODID = mod.metadata().id();
 		Enchantments.init();
-		PlayerBlockBreakEvents.AFTER.register(new SnowLayerBreaking());
+		SchnowyBlocks.init();
+		new SnowLayerInteractionEvents();
 
 		// Only the Nether shall not have the snow
 		BiomeModifications.create(new ResourceLocation("schnowy", "everywhere"))
