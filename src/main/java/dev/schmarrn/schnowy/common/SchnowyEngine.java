@@ -1,15 +1,24 @@
-package dev.schmarrn.schnowy;
+package dev.schmarrn.schnowy.common;
 
-import dev.schmarrn.schnowy.common.ReplaceableBlocks;
 import dev.schmarrn.schnowy.common.blocks.SchnowyProperties;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SnowLayerBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.chunk.LevelChunk;
+import net.minecraft.world.level.levelgen.Heightmap;
+import org.quiltmc.qsl.lifecycle.api.event.ServerTickEvents;
 
-public class SchnowyUtils {
+import javax.swing.text.html.HTMLDocument;
+import java.util.Random;
+
+public class SchnowyEngine {
 	public static SnowPlacementInfo getNewSnow(ServerLevel level, BlockPos pos, BlockState state) {
 		// snow should only accumulate if the block below is no powder snow
 		boolean canAccumulate = !level.getBlockState(pos.below()).is(Blocks.POWDER_SNOW);
@@ -63,6 +72,72 @@ public class SchnowyUtils {
 
 		return new SnowPlacementInfo(Blocks.SNOW.defaultBlockState(), pos);
 	}
+
+	public static float snowSpeed(ServerLevel level) {
+		if (blizzard.active) {
+			return 5f;
+		}
+		return level.isNight() ? 2f : 0.75f;
+	}
+
+	public static void tickChunk(ServerLevel level, LevelChunk chunk, int randomTickSpeed) {
+		ChunkPos chunkPos = chunk.getPos();
+		BlockPos pos = level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, level.getBlockRandomPos(chunkPos.getMinBlockX(), 0, chunkPos.getMinBlockZ(), 15));
+		Biome biome = level.getBiome(pos).value();
+		// biome check because of the nether
+		if (biome.shouldSnow(level, pos) && level.random.nextFloat() * snowSpeed(level) > 0.5f) {
+			BlockState state = level.getBlockState(pos);
+
+			// snow gen
+			SnowPlacementInfo info = getNewSnow(level, pos, state);
+			level.setBlockAndUpdate(info.pos, info.state);
+
+			// ice gen
+			if (biome.shouldFreeze(level, pos.below())) {
+				level.setBlockAndUpdate(pos.below(), Blocks.ICE.defaultBlockState());
+			}
+
+			// cauldron filling
+			state.getBlock().handlePrecipitation(state, level, pos, biome.getPrecipitation());
+		}
+	}
+
+	private static final Blizzard blizzard = new Blizzard();
+	public static void tick(MinecraftServer server) {
+		blizzard.tick(server);
+	}
+
+	public static void initialize() {
+		ServerTickEvents.END.register(SchnowyEngine::tick);
+	}
 	public record SnowPlacementInfo(BlockState state, BlockPos pos) {
+	}
+	private static class Blizzard {
+		boolean active;
+		int time;
+		Random random = new Random();
+		private Blizzard() {
+			this.active = false;
+			this.time = random.nextInt(40*60*20) * 100*60*20;
+		}
+		private void tick(MinecraftServer server) {
+			time--;
+			if (time == 0) {
+				if (active) {
+					active = false;
+					this.time = random.nextInt(40*60*20) * 100*60*20;
+					//TODO: Lang file
+					server.sendSystemMessage(Component.literal("Blizzard has ended"));
+				} else {
+					active = true;
+					this.time = random.nextInt(10*60*20) + 15*60*20;
+					//TODO: Lang file
+					server.sendSystemMessage(Component.literal("Blizzard has begin, seek shelter"));
+				}
+			}
+		}
+		private boolean isActive() {
+			return active;
+		}
 	}
 }
