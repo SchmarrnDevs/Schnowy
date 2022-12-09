@@ -20,57 +20,47 @@ import java.util.Random;
 
 public class SchnowyEngine {
 	public static SnowPlacementInfo getNewSnow(ServerLevel level, BlockPos pos, BlockState state) {
-		// snow should only accumulate if the block below is no powder snow
-		boolean canAccumulate = !level.getBlockState(pos.below()).is(Blocks.POWDER_SNOW);
+		// for now: don't enable, no idea what kind of block to put there
+		// if (level.getBlockState(pos.below(4)).is(Blocks.SNOW_BLOCK)) {
+		//	 return new SnowPlacementInfo(Blocks.PACKED_ICE.defaultBlockState(), pos.below(4), true);
+		// }
 
-		// for now: doesn't work because powder snow doesn't trigger snow accumulation
-		//if (level.getBlockState(pos.below(4)).is(Blocks.SNOW_BLOCK)) {
-		//	return new SnowPlacementInfo(Blocks.PACKED_ICE.defaultBlockState(), pos.below(4), true);
-		//}
 		// stacking snow
-		if (canAccumulate) {
-			if (state.hasProperty(SnowLayerBlock.LAYERS)) {
-				// If we got Layers, increment them - if full, make it a snow block or powder snow if high enough
-				int newLayerCount = state.getValue(SnowLayerBlock.LAYERS) + 1;
-				if (newLayerCount < 8) {
-					return new SnowPlacementInfo(state.setValue(SnowLayerBlock.LAYERS, newLayerCount), pos);
-				} else if (level.getBlockState(pos.below(3)).is(Blocks.SNOW_BLOCK) || level.getBlockState(pos.below()).is(BlockTags.LEAVES)) {
+		if (state.hasProperty(SnowLayerBlock.LAYERS)) {
+			// Normal Snow Layers, Snowed Flowers, Snowed Grass
+			// If we got Layers, increment them - if full, make it a snow block or powder snow if high enough
+			int newLayerCount = state.getValue(SnowLayerBlock.LAYERS) + 1;
+			if (newLayerCount < 8) {
+				return new SnowPlacementInfo(state.setValue(SnowLayerBlock.LAYERS, newLayerCount), pos);
+			} else {
+				if (level.getBlockState(pos.below(3)).is(Blocks.SNOW_BLOCK) || level.getBlockState(pos.below()).is(BlockTags.LEAVES)) {
 					return new SnowPlacementInfo(Blocks.POWDER_SNOW.defaultBlockState(), pos);
 				}
+				return new SnowPlacementInfo(Blocks.SNOW_BLOCK.defaultBlockState(), pos);
 			}
-			if (state.hasProperty(SchnowyProperties.HALF_LAYERS)) {
-				// If we got Layers, increment them - if full, make it a snow block or powder snow if high enough
-				int newLayerCount = state.getValue(SchnowyProperties.HALF_LAYERS) + 1;
-				if (newLayerCount < 4) {
-					return new SnowPlacementInfo(state.setValue(SchnowyProperties.HALF_LAYERS, newLayerCount), pos);
-				}
+		} else if (state.hasProperty(SchnowyProperties.HALF_LAYERS)) {
+			// Snowed Slabs
+			// If we got Layers, increment them
+			int newLayerCount = state.getValue(SchnowyProperties.HALF_LAYERS) + 1;
+			if (newLayerCount <= 4) {
+				return new SnowPlacementInfo(state.setValue(SchnowyProperties.HALF_LAYERS, newLayerCount), pos);
 			}
+		} else {
+			// Get the snowed equivalent of the block
 			BlockState newState = ReplaceableBlocks.withSnow(state);
 			if (newState != null) {
 				return new SnowPlacementInfo(newState, pos);
 			}
-			state = level.getBlockState(pos.below());
-			if (state.hasProperty(SchnowyProperties.HALF_LAYERS)) {
-				// If we got Layers, increment them - if full, make it a snow block or powder snow if high enough
-				int newLayerCount = state.getValue(SchnowyProperties.HALF_LAYERS) + 1;
-				if (newLayerCount < 4) {
-					return new SnowPlacementInfo(state.setValue(SchnowyProperties.HALF_LAYERS, newLayerCount), pos.below());
-				}
-			}
-			if (state.hasProperty(SnowLayerBlock.LAYERS)) {
-				// If we got Layers, increment them - if full, make it a snow block or powder snow if high enough
-				int newLayerCount = state.getValue(SnowLayerBlock.LAYERS) + 1;
-				if (newLayerCount < 8) {
-					return new SnowPlacementInfo(state.setValue(SnowLayerBlock.LAYERS, newLayerCount), pos.below());
-				}
-			}
-			newState = ReplaceableBlocks.withSnow(state);
-			if (newState != null) {
-				return new SnowPlacementInfo(newState, pos.below());
-			}
 		}
 
-		return new SnowPlacementInfo(Blocks.SNOW.defaultBlockState(), pos);
+		// if we can accumulate snow (this block isn't powder snow), then put a snow layer on top of it
+		boolean canAccumulate = !level.getBlockState(pos).is(Blocks.POWDER_SNOW);
+		if (canAccumulate) {
+			return new SnowPlacementInfo(Blocks.SNOW.defaultBlockState(), pos.above());
+		}
+
+		// if nothing can be done, return the same blockstate
+		return new SnowPlacementInfo(state, pos);
 	}
 
 	public static float snowSpeed(ServerLevel level) {
@@ -82,10 +72,10 @@ public class SchnowyEngine {
 
 	public static void tickChunk(ServerLevel level, LevelChunk chunk, int randomTickSpeed) {
 		ChunkPos chunkPos = chunk.getPos();
-		BlockPos pos = level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, level.getBlockRandomPos(chunkPos.getMinBlockX(), 0, chunkPos.getMinBlockZ(), 15));
+		BlockPos pos = level.getHeightmapPos(Heightmap.Types.WORLD_SURFACE, level.getBlockRandomPos(chunkPos.getMinBlockX(), 0, chunkPos.getMinBlockZ(), 15)).below();
 		Biome biome = level.getBiome(pos).value();
 		// biome check because of the nether
-		if (biome.shouldSnow(level, pos) && level.random.nextFloat() * snowSpeed(level) > 0.5f) {
+		if (!biome.warmEnoughToRain(pos) && level.random.nextFloat() * snowSpeed(level) > 0.5f) {
 			BlockState state = level.getBlockState(pos);
 
 			// snow gen
@@ -93,8 +83,8 @@ public class SchnowyEngine {
 			level.setBlockAndUpdate(info.pos, info.state);
 
 			// ice gen
-			if (biome.shouldFreeze(level, pos.below())) {
-				level.setBlockAndUpdate(pos.below(), Blocks.ICE.defaultBlockState());
+			if (biome.shouldFreeze(level, pos)) {
+				level.setBlockAndUpdate(pos, Blocks.ICE.defaultBlockState());
 			}
 
 			// cauldron filling
