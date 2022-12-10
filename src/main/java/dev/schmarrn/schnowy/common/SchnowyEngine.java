@@ -7,6 +7,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SnowLayerBlock;
@@ -55,7 +56,7 @@ public class SchnowyEngine {
 
 		// if we can accumulate snow (this block isn't powder snow), then put a snow layer on top of it
 		boolean canAccumulate = !level.getBlockState(pos).is(Blocks.POWDER_SNOW);
-		if (canAccumulate) {
+		if (canAccumulate && Blocks.SNOW.canSurvive(Blocks.SNOW.defaultBlockState(), level, pos.above())) {
 			return new SnowPlacementInfo(Blocks.SNOW.defaultBlockState(), pos.above());
 		}
 
@@ -64,7 +65,7 @@ public class SchnowyEngine {
 	}
 
 	public static float snowSpeed(ServerLevel level) {
-		if (blizzard.active) {
+		if (blizzard.isActive()) {
 			return 5f;
 		}
 		return level.isNight() ? 2f : 0.75f;
@@ -75,12 +76,14 @@ public class SchnowyEngine {
 		BlockPos pos = level.getHeightmapPos(Heightmap.Types.WORLD_SURFACE, level.getBlockRandomPos(chunkPos.getMinBlockX(), 0, chunkPos.getMinBlockZ(), 15)).below();
 		Biome biome = level.getBiome(pos).value();
 		// biome check because of the nether
-		if (!biome.warmEnoughToRain(pos) && level.random.nextFloat() * snowSpeed(level) > 0.5f) {
+		if (level.random.nextFloat() * snowSpeed(level) > 0.5f) {
 			BlockState state = level.getBlockState(pos);
 
 			// snow gen
-			SnowPlacementInfo info = getNewSnow(level, pos, state);
-			level.setBlockAndUpdate(info.pos, info.state);
+			if (!biome.warmEnoughToRain(pos) && level.isRaining() && level.getBrightness(LightLayer.BLOCK, pos.above()) < 10) {
+				SnowPlacementInfo info = getNewSnow(level, pos, state);
+				level.setBlockAndUpdate(info.pos, info.state);
+			}
 
 			// ice gen
 			if (biome.shouldFreeze(level, pos)) {
