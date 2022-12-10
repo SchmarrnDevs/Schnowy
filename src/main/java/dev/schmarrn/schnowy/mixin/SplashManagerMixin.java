@@ -13,7 +13,7 @@ import java.util.UUID;
 
 @Mixin(SplashManager.class)
 public class SplashManagerMixin {
-	List<String> splashes = List.of("Ho Ho Schnow!", "All I want for christmas is Enderegg");
+	List<String> splashes = List.of("Ho Ho Schnow!", "All I want for christmas is ENDEREGG!");
 	@Inject(method = "getSplash", at = @At("HEAD"), cancellable = true)
 	public void get(CallbackInfoReturnable<String> returnable) {
 		if (Math.random() > 0.8f) {
