@@ -1,5 +1,6 @@
 package dev.schmarrn.schnowy;
 
+import dev.schmarrn.schnowy.common.SchnowyEngine;
 import dev.schmarrn.schnowy.common.SnowLayerInteractionEvents;
 import dev.schmarrn.schnowy.common.blocks.SchnowyBlocks;
 import dev.schmarrn.schnowy.common.enchantments.Enchantments;
@@ -23,11 +24,12 @@ public class Schnowy implements ModInitializer {
 	public static String MODID = "";
 	@Override
 	public void onInitialize(ModContainer mod) {
-		LOGGER.info("Hello Quilt world from {}!", mod.metadata().name());
+		LOGGER.info("Ho Ho Ho, let's get {}!", mod.metadata().name());
 		MODID = mod.metadata().id();
 		Enchantments.init();
 		SchnowyBlocks.init();
 		SnowLayerInteractionEvents.getInstance();
+		SchnowyEngine.initialize();
 
 		// Only the Nether shall not have the snow
 		BiomeModifications.create(new ResourceLocation("schnowy", "everywhere"))

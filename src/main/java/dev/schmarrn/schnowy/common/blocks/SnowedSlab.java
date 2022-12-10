@@ -3,9 +3,12 @@ package dev.schmarrn.schnowy.common.blocks;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.data.BlockFamily;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -42,5 +45,15 @@ public class SnowedSlab extends Block {
 	@Override
 	public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
 		return shapes.get(state.getValue(SchnowyProperties.HALF_LAYERS));
+	}
+
+	@Override
+	protected void spawnDestroyParticles(Level world, Player player, BlockPos pos, BlockState state) {
+		super.spawnDestroyParticles(world, player, pos, Blocks.SNOW.defaultBlockState());
+	}
+
+	@Override
+	public SoundType getSoundType(BlockState state) {
+		return SoundType.SNOW;
 	}
 }
