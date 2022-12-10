@@ -32,7 +32,19 @@ public class SnowLayerBlockMixin {
 			int layers = state.getValue(LAYERS);
 			if (neighborState.hasProperty(LAYERS)) {
 				int layersToRemove = 8 - neighborState.getValue(LAYERS);
-				level.setBlockAndUpdate(neighborPos, Blocks.SNOW_BLOCK.defaultBlockState());
+				if (neighborState.is(Blocks.SNOW)) {
+					level.setBlockAndUpdate(neighborPos, Blocks.SNOW_BLOCK.defaultBlockState());
+				} else {
+					level.setBlockAndUpdate(neighborPos, neighborState.setValue(LAYERS, 8));
+				}
+				if (layers > layersToRemove) {
+					cir.setReturnValue(state.setValue(LAYERS, layers - layersToRemove));
+				} else {
+					cir.setReturnValue(Blocks.AIR.defaultBlockState());
+				}
+			} else if (neighborState.hasProperty(SchnowyProperties.HALF_LAYERS)) {
+				int layersToRemove = 4 - neighborState.getValue(SchnowyProperties.HALF_LAYERS);
+				level.setBlockAndUpdate(neighborPos, neighborState.setValue(SchnowyProperties.HALF_LAYERS, 4));
 				if (layers > layersToRemove) {
 					cir.setReturnValue(state.setValue(LAYERS, layers - layersToRemove));
 				} else {
