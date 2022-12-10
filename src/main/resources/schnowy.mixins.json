@@ -9,6 +9,7 @@
     "SnowLayerBlockMixin"
   ],
   "client": [
+    "MultiPlayerGameModeMixin",
     "SplashManagerMixin"
   ],
   "injectors": {

@@ -28,11 +28,17 @@ import java.util.Optional;
 
 
 public class SnowLayerInteractionEvents implements PlayerBlockBreakEvents.Before, UseBlockCallback {
+	private static SnowLayerInteractionEvents events = new SnowLayerInteractionEvents();
 
-	public SnowLayerInteractionEvents() {
+	private SnowLayerInteractionEvents() {
 		PlayerBlockBreakEvents.BEFORE.register(this);
 		UseBlockCallback.EVENT.register(this);
 	}
+
+	public static SnowLayerInteractionEvents getInstance() {
+		return events;
+	}
+
 	@Override
 	public boolean beforeBlockBreak(Level world, Player player, BlockPos pos, BlockState state, /* Nullable */ BlockEntity blockEntity) {
 		int layers = 0;

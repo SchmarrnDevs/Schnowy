@@ -27,7 +27,7 @@ public class Schnowy implements ModInitializer {
 		MODID = mod.metadata().id();
 		Enchantments.init();
 		SchnowyBlocks.init();
-		new SnowLayerInteractionEvents();
+		SnowLayerInteractionEvents.getInstance();
 
 		// Only the Nether shall not have the snow
 		BiomeModifications.create(new ResourceLocation("schnowy", "everywhere"))
