@@ -20,6 +20,12 @@ import javax.swing.text.html.HTMLDocument;
 import java.util.Random;
 
 public class SchnowyEngine {
+	public static final int SNOW_HEIGHT = 4;
+	public static final float BLIZZARD_MULTIPLIER = 5f;
+	public static final float DAYTIME_MULTIPLIER = 0.75f;
+	public static final float NIGHTTIME_MULTIPLIER = 2f;
+	public static final float RANDOM_SNOW_SPEED_WEIGHT = 5f; // The higher the Value, the lesser the randomness
+
 	public static SnowPlacementInfo getNewSnow(ServerLevel level, BlockPos pos, BlockState state) {
 		// for now: don't enable, no idea what kind of block to put there
 		// if (level.getBlockState(pos.below(4)).is(Blocks.SNOW_BLOCK)) {
@@ -34,7 +40,7 @@ public class SchnowyEngine {
 			if (newLayerCount < 8) {
 				return new SnowPlacementInfo(state.setValue(SnowLayerBlock.LAYERS, newLayerCount), pos);
 			} else {
-				if (level.getBlockState(pos.below(3)).is(Blocks.SNOW_BLOCK) || level.getBlockState(pos.below()).is(BlockTags.LEAVES)) {
+				if (level.getBlockState(pos.below(SNOW_HEIGHT - 1)).is(Blocks.SNOW_BLOCK) || level.getBlockState(pos.below()).is(BlockTags.LEAVES)) {
 					return new SnowPlacementInfo(Blocks.POWDER_SNOW.defaultBlockState(), pos);
 				}
 				return new SnowPlacementInfo(Blocks.SNOW_BLOCK.defaultBlockState(), pos);
@@ -65,18 +71,27 @@ public class SchnowyEngine {
 	}
 
 	public static float snowSpeed(ServerLevel level) {
+		// Consider: RANDOM_SNOW_SPEED_WEIGHT = 5f => Range: [0.9f, 1.1f]
+		float randomMultiplier = (level.random.nextFloat() - 0.5f) / RANDOM_SNOW_SPEED_WEIGHT + 1f;
 		if (blizzard.isActive()) {
-			return 5f;
+			return BLIZZARD_MULTIPLIER * randomMultiplier;
 		}
-		return level.isNight() ? 2f : 0.75f;
+		if (level.isNight()) {
+			float moonPhaseModifier = (1f - level.getMoonBrightness())/2f + 0.5f; // Ranges from [0.5f, 1f]
+			// Consider: NIGHTTIME_MULTIPLIER = 2f => return ranges from [1f, 2f]
+			return NIGHTTIME_MULTIPLIER * moonPhaseModifier * randomMultiplier;
+		} else {
+			return DAYTIME_MULTIPLIER * randomMultiplier;
+		}
 	}
 
 	public static void tickChunk(ServerLevel level, LevelChunk chunk, int randomTickSpeed) {
 		ChunkPos chunkPos = chunk.getPos();
-		BlockPos pos = level.getHeightmapPos(Heightmap.Types.WORLD_SURFACE, level.getBlockRandomPos(chunkPos.getMinBlockX(), 0, chunkPos.getMinBlockZ(), 15)).below();
-		Biome biome = level.getBiome(pos).value();
-		// biome check because of the nether
+
 		if (level.random.nextFloat() * snowSpeed(level) > 0.5f) {
+			BlockPos pos = level.getHeightmapPos(Heightmap.Types.WORLD_SURFACE, level.getBlockRandomPos(chunkPos.getMinBlockX(), 0, chunkPos.getMinBlockZ(), 15)).below();
+			Biome biome = level.getBiome(pos).value();
+
 			BlockState state = level.getBlockState(pos);
 
 			// snow gen
