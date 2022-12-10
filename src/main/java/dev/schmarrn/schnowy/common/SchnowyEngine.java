@@ -206,8 +206,6 @@ public class SchnowyEngine {
 	}
 	public record SnowPlacementInfo(BlockState state, BlockPos pos) {
 	}
-	public record LayerStateProperty(BlockState state, IntegerProperty property, int height, BlockPos pos) {
-	}
 	private static class Blizzard {
 		boolean active;
 		int time;
