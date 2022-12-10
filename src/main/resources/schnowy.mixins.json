@@ -4,8 +4,9 @@
   "package": "dev.schmarrn.schnowy.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "BiomeMixin",
     "ServerLevelMixin",
-    "BiomeMixin"
+    "SnowLayerBlockMixin"
   ],
   "client": [
     "SplashManagerMixin"

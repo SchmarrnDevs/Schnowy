@@ -27,21 +27,21 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Optional;
 
 
-public class SnowLayerInteractionEvents implements PlayerBlockBreakEvents.After, UseBlockCallback {
+public class SnowLayerInteractionEvents implements PlayerBlockBreakEvents.Before, UseBlockCallback {
 
 	public SnowLayerInteractionEvents() {
-		PlayerBlockBreakEvents.AFTER.register(this);
+		PlayerBlockBreakEvents.BEFORE.register(this);
 		UseBlockCallback.EVENT.register(this);
 	}
 	@Override
-	public void afterBlockBreak(Level world, Player player, BlockPos pos, BlockState state, BlockEntity blockEntity) {
+	public boolean beforeBlockBreak(Level world, Player player, BlockPos pos, BlockState state, /* Nullable */ BlockEntity blockEntity) {
 		int layers = 0;
 		IntegerProperty layerProperty = null;
 		if (state.hasProperty(BlockStateProperties.LAYERS)) {
 			layers = state.getValue(BlockStateProperties.LAYERS);
 			layerProperty = BlockStateProperties.LAYERS;
 		}
-		if (state.is(Blocks.SNOW_BLOCK)) {
+		if (state.is(Blocks.SNOW_BLOCK) || state.is(Blocks.POWDER_SNOW)) {
 			layers = 8;
 			state = Blocks.SNOW.defaultBlockState();
 			layerProperty = BlockStateProperties.LAYERS;
@@ -61,8 +61,12 @@ public class SnowLayerInteractionEvents implements PlayerBlockBreakEvents.After,
 			}
 			if (placedState != null) {
 				world.setBlock(pos, placedState, Block.UPDATE_ALL);
+			} else {
+				world.setBlock(pos, Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL);
 			}
+			return false;
 		}
+		return true;
 	}
 	@Override
 	public InteractionResult interact(Player player, Level world, InteractionHand hand, BlockHitResult hitResult) {
