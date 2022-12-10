@@ -9,6 +9,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.TallGrassBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -45,7 +46,6 @@ public class SnowedGrass extends TallGrassBlock {
 		super(BlockBehaviour.Properties.of(Material.SNOW).requiresCorrectToolForDrops().strength(0.2F).sound(SoundType.SNOW));
 	}
 
-
 	@Override
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
 		super.createBlockStateDefinition(builder);
@@ -65,5 +65,10 @@ public class SnowedGrass extends TallGrassBlock {
 	@Override
 	public float getShadeBrightness(BlockState state, BlockGetter world, BlockPos pos) {
 		return state.getValue(BlockStateProperties.LAYERS) == 8 ? 0.2F : 1.0F;
+	}
+
+	@Override
+	protected void spawnDestroyParticles(Level world, Player player, BlockPos pos, BlockState state) {
+		super.spawnDestroyParticles(world, player, pos, Blocks.SNOW.defaultBlockState());
 	}
 }

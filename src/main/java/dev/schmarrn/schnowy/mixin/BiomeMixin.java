@@ -29,6 +29,7 @@ public abstract class BiomeMixin {
 				// TODO: replace with simpler mixin v-- the or-ed boolean here is the important part, everything else is the same in the original fn.
 				if ((blockState.isAir() || blockState.hasProperty(SnowLayerBlock.LAYERS) || blockState.hasProperty(SchnowyProperties.HALF_LAYERS) || ReplaceableBlocks.withSnow(blockState) != null) && Blocks.SNOW.defaultBlockState().canSurvive(world, blockPos)) {
 					cir.setReturnValue(true);
+					return;
 				}
 				blockState = world.getBlockState(blockPos.below());
 				if (blockState.hasProperty(SnowLayerBlock.LAYERS) || blockState.hasProperty(SchnowyProperties.HALF_LAYERS) || ReplaceableBlocks.withSnow(blockState) != null) {

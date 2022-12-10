@@ -73,4 +73,9 @@ public class SnowedFlower extends FlowerBlock {
 	public boolean propagatesSkylightDown(BlockState state, BlockGetter world, BlockPos pos) {
 		return true;
 	}
+
+	@Override
+	protected void spawnDestroyParticles(Level world, Player player, BlockPos pos, BlockState state) {
+		super.spawnDestroyParticles(world, player, pos, Blocks.SNOW.defaultBlockState());
+	}
 }
