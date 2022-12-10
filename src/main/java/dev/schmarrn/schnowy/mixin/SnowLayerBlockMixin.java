@@ -28,7 +28,6 @@ public class SnowLayerBlockMixin {
 	@Inject(method = "updateShape", at = @At("HEAD"), cancellable = true)
 	public void schnowy$updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor world, BlockPos pos, BlockPos neighborPos, CallbackInfoReturnable<BlockState> cir) {
 		if (world instanceof ServerLevel level && !state.canSurvive(world, pos)) {
-			// Schnowy.LOGGER.info("{}, {}, {}, {}, {}", state, neighborState, direction, pos, neighborPos);
 			int layers = state.getValue(LAYERS);
 			if (neighborState.hasProperty(LAYERS)) {
 				int layersToRemove = 8 - neighborState.getValue(LAYERS);

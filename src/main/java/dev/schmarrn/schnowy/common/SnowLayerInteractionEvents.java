@@ -40,7 +40,7 @@ public class SnowLayerInteractionEvents implements PlayerBlockBreakEvents.Before
 	}
 
 	@Override
-	public boolean beforeBlockBreak(Level world, Player player, BlockPos pos, BlockState state, /* Nullable */ BlockEntity blockEntity) {
+	public boolean beforeBlockBreak(Level world, Player player, BlockPos pos, BlockState state, @Nullable BlockEntity blockEntity) {
 		int layers = 0;
 		IntegerProperty layerProperty = null;
 		if (state.hasProperty(BlockStateProperties.LAYERS)) {
