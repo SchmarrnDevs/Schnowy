@@ -227,12 +227,10 @@ public class SchnowyEngine {
 				if (active) {
 					active = false;
 					this.time = random.nextInt(40*60*20) * 100*60*20;
-					//TODO: Lang file
 					server.sendSystemMessage(Component.translatable("announcement.schnowy.blizzard.stop"));
 				} else {
 					active = true;
 					this.time = random.nextInt(10*60*20) + 15*60*20;
-					//TODO: Lang file
 					server.sendSystemMessage(Component.translatable("announcement.schnowy.blizzard.start"));
 				}
 			}
