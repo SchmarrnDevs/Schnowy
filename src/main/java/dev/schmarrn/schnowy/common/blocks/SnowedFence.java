@@ -1,8 +1,6 @@
 package dev.schmarrn.schnowy.common.blocks;
 
-import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -16,14 +14,11 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class SnowedFence extends FenceBlock {
-	public final FenceBlock parent;
+	public final Block parent;
 
-	public SnowedFence(FenceBlock parent) {
-		super(BlockBehaviour.Properties.of(Material.SNOW).requiresCorrectToolForDrops().strength(0.2F).sound(SoundType.SNOW));
+	public SnowedFence(Block parent) {
+		super(BlockBehaviour.Properties.of(Material.SNOW).requiresCorrectToolForDrops().strength(0.2F).sound(SoundType.SNOW).noOcclusion());
 		this.parent = parent;
 	}
 

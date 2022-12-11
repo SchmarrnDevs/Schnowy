@@ -39,13 +39,14 @@ public class SchnowyEngine {
 			// Normal Snow Layers, Snowed Flowers, Snowed Grass
 			// If we got Layers, increment them - if full, make it a snow block or powder snow if high enough
 			int newLayerCount = state.getValue(SnowLayerBlock.LAYERS) + 1;
-			if (newLayerCount < 8) {
-				return Optional.of(new SnowPlacementInfo(state.setValue(SnowLayerBlock.LAYERS, newLayerCount), pos));
-			} else {
+			if (state.is(Blocks.SNOW) && newLayerCount >= 8) {
 				if (isSnowAtMaxHeight(level, pos) || level.getBlockState(pos.below()).is(BlockTags.LEAVES)) {
 					return Optional.of(new SnowPlacementInfo(Blocks.POWDER_SNOW.defaultBlockState(), pos));
 				}
 				return Optional.of(new SnowPlacementInfo(Blocks.SNOW_BLOCK.defaultBlockState(), pos));
+			}
+			if (newLayerCount <= 8) {
+				return Optional.of(new SnowPlacementInfo(state.setValue(SnowLayerBlock.LAYERS, newLayerCount), pos));
 			}
 		} else if (state.hasProperty(SchnowyProperties.HALF_LAYERS)) {
 			// Snowed Slabs
@@ -171,7 +172,7 @@ public class SchnowyEngine {
 	public static void tickChunk(ServerLevel level, LevelChunk chunk, int randomTickSpeed) {
 		ChunkPos chunkPos = chunk.getPos();
 		if (level.random.nextFloat() * snowSpeed(level) > 0.5f && level.isRaining()) {
-			BlockPos pos = level.getHeightmapPos(Heightmap.Types.WORLD_SURFACE, /*level.getBlockRandomPos(chunkPos.getMinBlockX(), 0, chunkPos.getMinBlockZ(), 15)*/ new BlockPos(0, 0, 0)).below();
+			BlockPos pos = level.getHeightmapPos(Heightmap.Types.WORLD_SURFACE, level.getBlockRandomPos(chunkPos.getMinBlockX(), 0, chunkPos.getMinBlockZ(), 15)).below();
 			Biome biome = level.getBiome(pos).value();
 			pos = findLowestLayerPos(level, pos, 512);
 			if (level.getBlockState(pos).isAir() && isFullSnowLogged(level.getBlockState(pos.below())))

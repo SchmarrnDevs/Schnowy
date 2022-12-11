@@ -2,8 +2,9 @@
 	"credit": "Made with Blockbench",
 	"parent": "block/block",
 	"textures": {
-        "snow": "minecraft:block/snow"
-	},
+        "snow": "minecraft:block/snow",
+        "particle": "#side"
+    },
 	"elements": [
 		{
 			"name": "slab",

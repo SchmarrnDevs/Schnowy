@@ -15,6 +15,7 @@ public class SchnowyBlocks {
 
 	public static final Map<Block, SnowedSlab> SLABS = new HashMap<>();
 	public static final Map<Block, SnowedFence> FENCES = new HashMap<>();
+	public static final Map<Block, SnowedStair> STAIRS = new HashMap<>();
 	public static final Map<FlowerBlock, SnowedFlower> FLOWERS = new HashMap<>();
 	public static final Map<TallGrassBlock, SnowedGrass> SNOWED_GRASS = new HashMap<>();
 	public static final Block SNOWED_DEAD_BUSH = new SnowedDeadBush();
@@ -43,7 +44,13 @@ public class SchnowyBlocks {
 		BlockFamilies.getAllFamilies().forEach(blockFamily -> {
 			Block fence = blockFamily.get(BlockFamily.Variant.FENCE);
 			if (fence != null) {
-				createFence(fence);
+				createFence(fence, blockFamily.getBaseBlock());
+			}
+		});
+		BlockFamilies.getAllFamilies().forEach(blockFamily -> {
+			Block stair = blockFamily.get(BlockFamily.Variant.STAIRS);
+			if (stair != null) {
+				createStair(stair, blockFamily.getBaseBlock());
 			}
 		});
 
@@ -69,9 +76,14 @@ public class SchnowyBlocks {
 		SLABS.put(slabReplacement, slab);
 		Registry.register(Registry.BLOCK, new ResourceLocation(Schnowy.MODID, "snowed_" + Registry.BLOCK.getKey(slabReplacement).getPath()), slab);
 	}
+	public static void createStair(Block stair, Block fullBlock) {
+		SnowedStair snowedStair = new SnowedStair(textureRedirects.getOrDefault(fullBlock, fullBlock));
+		STAIRS.put(stair, snowedStair);
+		Registry.register(Registry.BLOCK, new ResourceLocation(Schnowy.MODID, "snowed_" + Registry.BLOCK.getKey(stair).getPath()), snowedStair);
+	}
 
-	public static void createFence(Block fence) {
-		SnowedFence slab = new SnowedFence((FenceBlock) fence);
+	public static void createFence(Block fence, Block textureParent) {
+		SnowedFence slab = new SnowedFence(textureParent);
 		FENCES.put(fence, slab);
 		Registry.register(Registry.BLOCK, new ResourceLocation(Schnowy.MODID, "snowed_" + Registry.BLOCK.getKey(fence).getPath()), slab);
 	}
