@@ -1,10 +1,7 @@
 package dev.schmarrn.schnowy.datagen;
 
 import dev.schmarrn.schnowy.Schnowy;
-import dev.schmarrn.schnowy.common.blocks.SchnowyBlocks;
-import dev.schmarrn.schnowy.common.blocks.SchnowyProperties;
-import dev.schmarrn.schnowy.common.blocks.SnowedFlower;
-import dev.schmarrn.schnowy.common.blocks.SnowedSlab;
+import dev.schmarrn.schnowy.common.blocks.*;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.Util;
@@ -70,11 +67,13 @@ public class SchnowyBlockModelProvider extends FabricModelProvider {
 									.with(generateCrossPropertyDispatch(snowedFlower, snowedFlower.parent, false, blockStateModelGenerator))
 					);
 		}
-		blockStateModelGenerator.blockStateOutput
-				.accept(
-						MultiVariantGenerator.multiVariant(SchnowyBlocks.SNOWED_GRASS)
-								.with(generateCrossPropertyDispatch(SchnowyBlocks.SNOWED_GRASS, Blocks.GRASS, true, blockStateModelGenerator))
-				);
+		for (SnowedGrass snowedGrass : SchnowyBlocks.SNOWED_GRASS.values()) {
+			blockStateModelGenerator.blockStateOutput
+					.accept(
+							MultiVariantGenerator.multiVariant(snowedGrass)
+									.with(generateCrossPropertyDispatch(snowedGrass, snowedGrass.parent, true, blockStateModelGenerator))
+					);
+		}
 		blockStateModelGenerator.blockStateOutput
 				.accept(
 						MultiVariantGenerator.multiVariant(SchnowyBlocks.SNOWED_DEAD_BUSH)

@@ -66,6 +66,8 @@
     "schnowy:snowed_stone_brick_slab",
     "schnowy:snowed_blackstone_slab",
     "schnowy:snowed_mud_brick_slab",
-    "schnowy:snowed_grass"
+    "schnowy:snowed_grass",
+    "schnowy:snowed_fern",
+    "schnowy:snowed_dead_bush"
   ]
 }

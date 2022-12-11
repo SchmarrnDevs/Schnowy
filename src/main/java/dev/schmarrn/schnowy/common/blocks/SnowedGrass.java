@@ -42,8 +42,11 @@ public class SnowedGrass extends TallGrassBlock {
 		return shapes;
 	});
 
-	public SnowedGrass() {
+	public final TallGrassBlock parent;
+
+	public SnowedGrass(TallGrassBlock parent) {
 		super(BlockBehaviour.Properties.of(Material.SNOW).requiresCorrectToolForDrops().strength(0.2F).sound(SoundType.SNOW));
+		this.parent = parent;
 	}
 
 	@Override

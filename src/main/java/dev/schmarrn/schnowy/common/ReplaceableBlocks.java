@@ -4,6 +4,7 @@ import dev.schmarrn.schnowy.common.blocks.SchnowyBlocks;
 import net.minecraft.Util;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.TallGrassBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Property;
 import org.jetbrains.annotations.Nullable;
@@ -16,7 +17,7 @@ public class ReplaceableBlocks {
 		List<Replacement> blocks = new ArrayList<>();
 		SchnowyBlocks.SLABS.forEach((emptySlab, snowedSlab) -> blocks.add(new Replacement(emptySlab, snowedSlab)));
 		SchnowyBlocks.FLOWERS.forEach((emptySlab, snowedSlab) -> blocks.add(new Replacement(emptySlab, snowedSlab)));
-		blocks.add(new Replacement(Blocks.GRASS, SchnowyBlocks.SNOWED_GRASS));
+		SchnowyBlocks.SNOWED_GRASS.forEach((base, snowed) -> blocks.add(new Replacement(base, snowed)));
 		blocks.add(new Replacement(Blocks.DEAD_BUSH, SchnowyBlocks.SNOWED_DEAD_BUSH));
 		return blocks;
 	});

@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "layers=1": {
+      "model": "schnowy:block/snowed_fern1"
+    },
+    "layers=2": {
+      "model": "schnowy:block/snowed_fern2"
+    },
+    "layers=3": {
+      "model": "schnowy:block/snowed_fern3"
+    },
+    "layers=4": {
+      "model": "schnowy:block/snowed_fern4"
+    },
+    "layers=5": {
+      "model": "schnowy:block/snowed_fern5"
+    },
+    "layers=6": {
+      "model": "schnowy:block/snowed_fern6"
+    },
+    "layers=7": {
+      "model": "schnowy:block/snowed_fern7"
+    },
+    "layers=8": {
+      "model": "schnowy:block/snowed_fern8"
+    }
+  }
+}

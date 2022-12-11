@@ -9,6 +9,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FlowerBlock;
+import net.minecraft.world.level.block.TallGrassBlock;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,7 +18,7 @@ public class SchnowyBlocks {
 
 	public static final Map<Block, SnowedSlab> SLABS = new HashMap<>();
 	public static final Map<FlowerBlock, SnowedFlower> FLOWERS = new HashMap<>();
-	public static final Block SNOWED_GRASS = new SnowedGrass();
+	public static final Map<TallGrassBlock, SnowedGrass> SNOWED_GRASS = new HashMap<>();
 	public static final Block SNOWED_DEAD_BUSH = new SnowedDeadBush();
 
 	private static final Map<Block, Block> textureRedirects = Util.make(() -> {
@@ -40,8 +41,15 @@ public class SchnowyBlocks {
 			}
 		});
 
-		Registry.register(Registry.BLOCK, new ResourceLocation(Schnowy.MODID, "snowed_grass"), SNOWED_GRASS);
+		createGrass((TallGrassBlock) Blocks.GRASS);
+		createGrass((TallGrassBlock) Blocks.FERN);
 		Registry.register(Registry.BLOCK, new ResourceLocation(Schnowy.MODID, "snowed_dead_bush"), SNOWED_DEAD_BUSH);
+	}
+
+	public static void createGrass(TallGrassBlock parent) {
+		SnowedGrass snowed = new SnowedGrass(parent);
+		SNOWED_GRASS.put(parent, snowed);
+		Registry.register(Registry.BLOCK, new ResourceLocation(Schnowy.MODID, "snowed_" + Registry.BLOCK.getKey(parent).getPath()), snowed);
 	}
 
 	public static void createFlower(FlowerBlock flowerReplacement) {
