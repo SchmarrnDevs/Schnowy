@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "layers=1": {
+      "model": "schnowy:block/snowed_dead_bush1"
+    },
+    "layers=2": {
+      "model": "schnowy:block/snowed_dead_bush2"
+    },
+    "layers=3": {
+      "model": "schnowy:block/snowed_dead_bush3"
+    },
+    "layers=4": {
+      "model": "schnowy:block/snowed_dead_bush4"
+    },
+    "layers=5": {
+      "model": "schnowy:block/snowed_dead_bush5"
+    },
+    "layers=6": {
+      "model": "schnowy:block/snowed_dead_bush6"
+    },
+    "layers=7": {
+      "model": "schnowy:block/snowed_dead_bush7"
+    },
+    "layers=8": {
+      "model": "schnowy:block/snowed_dead_bush8"
+    }
+  }
+}

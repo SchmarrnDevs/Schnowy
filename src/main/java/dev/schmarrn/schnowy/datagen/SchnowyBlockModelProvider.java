@@ -75,6 +75,11 @@ public class SchnowyBlockModelProvider extends FabricModelProvider {
 						MultiVariantGenerator.multiVariant(SchnowyBlocks.SNOWED_GRASS)
 								.with(generateCrossPropertyDispatch(SchnowyBlocks.SNOWED_GRASS, Blocks.GRASS, true, blockStateModelGenerator))
 				);
+		blockStateModelGenerator.blockStateOutput
+				.accept(
+						MultiVariantGenerator.multiVariant(SchnowyBlocks.SNOWED_DEAD_BUSH)
+								.with(generateCrossPropertyDispatch(SchnowyBlocks.SNOWED_DEAD_BUSH, Blocks.DEAD_BUSH, false, blockStateModelGenerator))
+				);
 	}
 
 	private static Variant generateSlabModel(int level, Block block, Block parent, BlockModelGenerators blockStateModelGenerator) {

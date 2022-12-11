@@ -18,6 +18,7 @@ public class SchnowyBlocks {
 	public static final Map<Block, SnowedSlab> SLABS = new HashMap<>();
 	public static final Map<FlowerBlock, SnowedFlower> FLOWERS = new HashMap<>();
 	public static final Block SNOWED_GRASS = new SnowedGrass();
+	public static final Block SNOWED_DEAD_BUSH = new SnowedDeadBush();
 
 	private static final Map<Block, Block> textureRedirects = Util.make(() -> {
 		Map<Block, Block> map = new HashMap<>();
@@ -40,6 +41,7 @@ public class SchnowyBlocks {
 		});
 
 		Registry.register(Registry.BLOCK, new ResourceLocation(Schnowy.MODID, "snowed_grass"), SNOWED_GRASS);
+		Registry.register(Registry.BLOCK, new ResourceLocation(Schnowy.MODID, "snowed_dead_bush"), SNOWED_DEAD_BUSH);
 	}
 
 	public static void createFlower(FlowerBlock flowerReplacement) {

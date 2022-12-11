@@ -18,6 +18,7 @@ public class SchnowyClient implements ClientModInitializer {
 			BlockRenderLayerMap.put(RenderType.cutout(), block);
 		}
 		BlockRenderLayerMap.put(RenderType.cutout(), SchnowyBlocks.SNOWED_GRASS);
+		BlockRenderLayerMap.put(RenderType.cutout(), SchnowyBlocks.SNOWED_DEAD_BUSH);
 		ColorProviderRegistry.BLOCK.register((blockState, level, blockPos, i) -> Minecraft.getInstance().getBlockColors().getColor(Blocks.GRASS.defaultBlockState(), level, blockPos, i),SchnowyBlocks.SNOWED_GRASS);
 	}
 }

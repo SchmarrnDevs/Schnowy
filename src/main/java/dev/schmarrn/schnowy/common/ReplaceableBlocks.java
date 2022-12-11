@@ -17,6 +17,7 @@ public class ReplaceableBlocks {
 		SchnowyBlocks.SLABS.forEach((emptySlab, snowedSlab) -> blocks.add(new Replacement(emptySlab, snowedSlab)));
 		SchnowyBlocks.FLOWERS.forEach((emptySlab, snowedSlab) -> blocks.add(new Replacement(emptySlab, snowedSlab)));
 		blocks.add(new Replacement(Blocks.GRASS, SchnowyBlocks.SNOWED_GRASS));
+		blocks.add(new Replacement(Blocks.DEAD_BUSH, SchnowyBlocks.SNOWED_DEAD_BUSH));
 		return blocks;
 	});
 
