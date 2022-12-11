@@ -1,5 +1,6 @@
 package dev.schmarrn.schnowy;
 
+import dev.schmarrn.schnowy.common.PlayerJoinEvent;
 import dev.schmarrn.schnowy.common.SchnowyEngine;
 import dev.schmarrn.schnowy.common.SnowLayerInteractionEvents;
 import dev.schmarrn.schnowy.common.blocks.SchnowyBlocks;
@@ -7,8 +8,11 @@ import dev.schmarrn.schnowy.common.enchantments.Enchantments;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome;
+import org.apache.logging.log4j.core.jmx.Server;
 import org.quiltmc.loader.api.ModContainer;
 import org.quiltmc.qsl.base.api.entrypoint.ModInitializer;
+import org.quiltmc.qsl.networking.api.ServerLoginConnectionEvents;
+import org.quiltmc.qsl.networking.api.ServerPlayConnectionEvents;
 import org.quiltmc.qsl.worldgen.biome.api.BiomeModifications;
 import org.quiltmc.qsl.worldgen.biome.api.BiomeSelectors;
 import org.quiltmc.qsl.worldgen.biome.api.ModificationPhase;
@@ -30,6 +34,8 @@ public class Schnowy implements ModInitializer {
 		SchnowyBlocks.init();
 		SnowLayerInteractionEvents.getInstance();
 		SchnowyEngine.initialize();
+
+		ServerPlayConnectionEvents.JOIN.register(new PlayerJoinEvent());
 
 		// Only the Nether shall not have the snow
 		BiomeModifications.create(new ResourceLocation("schnowy", "everywhere"))

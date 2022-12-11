@@ -213,7 +213,7 @@ public class SchnowyEngine {
 	}
 	public record SnowPlacementInfo(BlockState state, BlockPos pos) {
 	}
-	private static class Blizzard {
+	public static class Blizzard {
 		boolean active;
 		int time;
 		Random random = new Random();
@@ -228,17 +228,21 @@ public class SchnowyEngine {
 					active = false;
 					this.time = random.nextInt(40*60*20) * 100*60*20;
 					//TODO: Lang file
-					server.sendSystemMessage(Component.literal("Blizzard has ended"));
+					server.sendSystemMessage(Component.translatable("announcement.schnowy.blizzard.stop"));
 				} else {
 					active = true;
 					this.time = random.nextInt(10*60*20) + 15*60*20;
 					//TODO: Lang file
-					server.sendSystemMessage(Component.literal("Blizzard has begin, seek shelter"));
+					server.sendSystemMessage(Component.translatable("announcement.schnowy.blizzard.start"));
 				}
 			}
 		}
-		private boolean isActive() {
+		public boolean isActive() {
 			return active;
 		}
+	}
+
+	public static Blizzard getBlizzard() {
+		return blizzard;
 	}
 }
