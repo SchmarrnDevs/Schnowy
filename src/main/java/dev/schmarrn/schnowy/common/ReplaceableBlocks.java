@@ -4,9 +4,11 @@ import dev.schmarrn.schnowy.common.blocks.SchnowyBlocks;
 import net.minecraft.Util;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.TallGrassBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Property;
+import net.minecraft.world.level.block.state.properties.SlabType;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -15,10 +17,11 @@ import java.util.List;
 public class ReplaceableBlocks {
 	public static final List<Replacement> BLOCKS = Util.make(() -> {
 		List<Replacement> blocks = new ArrayList<>();
-		SchnowyBlocks.SLABS.forEach((emptySlab, snowedSlab) -> blocks.add(new Replacement(emptySlab, snowedSlab)));
-		SchnowyBlocks.FLOWERS.forEach((emptySlab, snowedSlab) -> blocks.add(new Replacement(emptySlab, snowedSlab)));
-		SchnowyBlocks.SNOWED_GRASS.forEach((base, snowed) -> blocks.add(new Replacement(base, snowed)));
-		blocks.add(new Replacement(Blocks.DEAD_BUSH, SchnowyBlocks.SNOWED_DEAD_BUSH));
+		SchnowyBlocks.SLABS.forEach((emptySlab, snowedSlab) -> blocks.add(new Replacement(emptySlab, snowedSlab, state-> state.getValue(SlabBlock.TYPE) == SlabType.BOTTOM, true)));
+		SchnowyBlocks.FENCES.forEach((base, snowedFence) -> blocks.add(Replacement.of(base, snowedFence, true)));
+		SchnowyBlocks.FLOWERS.forEach((emptySlab, snowedSlab) -> blocks.add(Replacement.of(emptySlab, snowedSlab, false)));
+		SchnowyBlocks.SNOWED_GRASS.forEach((base, snowed) -> blocks.add(Replacement.of(base, snowed, false)));
+		blocks.add(Replacement.of(Blocks.DEAD_BUSH, SchnowyBlocks.SNOWED_DEAD_BUSH, false));
 		return blocks;
 	});
 

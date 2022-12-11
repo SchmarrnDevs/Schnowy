@@ -143,7 +143,14 @@ public class SchnowyEngine {
 	}
 
 	private static boolean isSnow(BlockState state) {
-		return state.is(Blocks.SNOW_BLOCK) || state.hasProperty(SnowLayerBlock.LAYERS) || state.hasProperty(SchnowyProperties.HALF_LAYERS);
+		return state.is(Blocks.SNOW_BLOCK)
+				|| state.hasProperty(SnowLayerBlock.LAYERS)
+				|| state.hasProperty(SchnowyProperties.HALF_LAYERS)
+				|| ReplaceableBlocks.BLOCKS.stream()
+					.filter(replacement -> state.is(replacement.withoutSnow()))
+					.findFirst()
+					.map(replacement -> !replacement.moveDown())
+					.orElse(false);
 	}
 
 	public static float snowSpeed(ServerLevel level) {
@@ -163,15 +170,15 @@ public class SchnowyEngine {
 
 	public static void tickChunk(ServerLevel level, LevelChunk chunk, int randomTickSpeed) {
 		ChunkPos chunkPos = chunk.getPos();
-		if (level.random.nextFloat() * snowSpeed(level) > 0.5f) {
-			BlockPos pos = level.getHeightmapPos(Heightmap.Types.WORLD_SURFACE, level.getBlockRandomPos(chunkPos.getMinBlockX(), 0, chunkPos.getMinBlockZ(), 15)).below();
+		if (level.random.nextFloat() * snowSpeed(level) > 0.5f && level.isRaining()) {
+			BlockPos pos = level.getHeightmapPos(Heightmap.Types.WORLD_SURFACE, /*level.getBlockRandomPos(chunkPos.getMinBlockX(), 0, chunkPos.getMinBlockZ(), 15)*/ new BlockPos(0, 0, 0)).below();
 			Biome biome = level.getBiome(pos).value();
 			pos = findLowestLayerPos(level, pos, 512);
 			if (level.getBlockState(pos).isAir() && isFullSnowLogged(level.getBlockState(pos.below())))
 				pos = pos.below();
 			// snow gen
 			BlockState state = level.getBlockState(pos);
-			if (!biome.warmEnoughToRain(pos) && level.isRaining() && level.getBrightness(LightLayer.BLOCK, pos.above()) < 10) {
+			if (!biome.warmEnoughToRain(pos) && level.getBrightness(LightLayer.BLOCK, pos.above()) < 10) {
 				getNewSnow(level, pos, state)
 						.ifPresent(info -> level.setBlockAndUpdate(info.pos, info.state));
 			}
