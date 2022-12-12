@@ -1,0 +1,112 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "schnowy:block/snowed_birch_fence_post"
+      }
+    },
+    {
+      "apply": {
+        "model": "schnowy:block/snowed_birch_fence_side",
+        "uvlock": true
+      },
+      "when": {
+        "north": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "schnowy:block/snowed_birch_fence_side",
+        "uvlock": true,
+        "y": 90
+      },
+      "when": {
+        "east": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "schnowy:block/snowed_birch_fence_side",
+        "uvlock": true,
+        "y": 180
+      },
+      "when": {
+        "south": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "schnowy:block/snowed_birch_fence_side",
+        "uvlock": true,
+        "y": 270
+      },
+      "when": {
+        "west": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/snow_height2"
+      },
+      "when": {
+        "layers": "1"
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/snow_height4"
+      },
+      "when": {
+        "layers": "2"
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/snow_height6"
+      },
+      "when": {
+        "layers": "3"
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/snow_height8"
+      },
+      "when": {
+        "layers": "4"
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/snow_height10"
+      },
+      "when": {
+        "layers": "5"
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/snow_height12"
+      },
+      "when": {
+        "layers": "6"
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/snow_height14"
+      },
+      "when": {
+        "layers": "7"
+      }
+    },
+    {
+      "apply": {
+        "model": "schnowy:block/snow"
+      },
+      "when": {
+        "layers": "8"
+      }
+    }
+  ]
+}

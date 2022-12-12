@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "schnowy:snowed_crimson_fence",
+    "schnowy:snowed_oak_fence",
+    "schnowy:snowed_warped_fence",
+    "schnowy:snowed_birch_fence",
+    "schnowy:snowed_mangrove_fence",
+    "schnowy:snowed_jungle_fence",
+    "schnowy:snowed_dark_oak_fence",
+    "schnowy:snowed_acacia_fence",
+    "schnowy:snowed_spruce_fence",
+    "schnowy:snowed_nether_brick_fence"
+  ]
+}

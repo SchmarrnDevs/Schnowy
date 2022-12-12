@@ -12,5 +12,7 @@ public class LanguageProvider extends FabricLanguageProvider {
 	@Override
 	public void generateTranslations(TranslationBuilder translationBuilder) {
 		translationBuilder.add(Enchantments.SNOW_CLEARING, "Snow Clearing");
+		translationBuilder.add("announcement.schnowy.blizzard.start", "A blizzard is coming! Seek shelter!");
+		translationBuilder.add("announcement.schnowy.blizzard.stop", "The blizzard is over! It is save to come out again.");
 	}
 }

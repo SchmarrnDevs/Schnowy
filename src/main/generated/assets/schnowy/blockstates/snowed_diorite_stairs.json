@@ -1,0 +1,364 @@
+{
+  "variants": {
+    "facing=east,half_layers=1,shape=inner_left": {
+      "model": "schnowy:block/snowed_diorite_stairs_inner1",
+      "uvlock": true,
+      "y": 270
+    },
+    "facing=east,half_layers=1,shape=inner_right": {
+      "model": "schnowy:block/snowed_diorite_stairs_inner1"
+    },
+    "facing=east,half_layers=1,shape=outer_left": {
+      "model": "schnowy:block/snowed_diorite_stairs_outer1",
+      "uvlock": true,
+      "y": 270
+    },
+    "facing=east,half_layers=1,shape=outer_right": {
+      "model": "schnowy:block/snowed_diorite_stairs_outer1"
+    },
+    "facing=east,half_layers=1,shape=straight": {
+      "model": "schnowy:block/snowed_diorite_stairs1"
+    },
+    "facing=east,half_layers=2,shape=inner_left": {
+      "model": "schnowy:block/snowed_diorite_stairs_inner2",
+      "uvlock": true,
+      "y": 270
+    },
+    "facing=east,half_layers=2,shape=inner_right": {
+      "model": "schnowy:block/snowed_diorite_stairs_inner2"
+    },
+    "facing=east,half_layers=2,shape=outer_left": {
+      "model": "schnowy:block/snowed_diorite_stairs_outer2",
+      "uvlock": true,
+      "y": 270
+    },
+    "facing=east,half_layers=2,shape=outer_right": {
+      "model": "schnowy:block/snowed_diorite_stairs_outer2"
+    },
+    "facing=east,half_layers=2,shape=straight": {
+      "model": "schnowy:block/snowed_diorite_stairs2"
+    },
+    "facing=east,half_layers=3,shape=inner_left": {
+      "model": "schnowy:block/snowed_diorite_stairs_inner3",
+      "uvlock": true,
+      "y": 270
+    },
+    "facing=east,half_layers=3,shape=inner_right": {
+      "model": "schnowy:block/snowed_diorite_stairs_inner3"
+    },
+    "facing=east,half_layers=3,shape=outer_left": {
+      "model": "schnowy:block/snowed_diorite_stairs_outer3",
+      "uvlock": true,
+      "y": 270
+    },
+    "facing=east,half_layers=3,shape=outer_right": {
+      "model": "schnowy:block/snowed_diorite_stairs_outer3"
+    },
+    "facing=east,half_layers=3,shape=straight": {
+      "model": "schnowy:block/snowed_diorite_stairs3"
+    },
+    "facing=east,half_layers=4,shape=inner_left": {
+      "model": "schnowy:block/snowed_diorite_stairs_inner4",
+      "uvlock": true,
+      "y": 270
+    },
+    "facing=east,half_layers=4,shape=inner_right": {
+      "model": "schnowy:block/snowed_diorite_stairs_inner4"
+    },
+    "facing=east,half_layers=4,shape=outer_left": {
+      "model": "schnowy:block/snowed_diorite_stairs_outer4",
+      "uvlock": true,
+      "y": 270
+    },
+    "facing=east,half_layers=4,shape=outer_right": {
+      "model": "schnowy:block/snowed_diorite_stairs_outer4"
+    },
+    "facing=east,half_layers=4,shape=straight": {
+      "model": "schnowy:block/snowed_diorite_stairs4"
+    },
+    "facing=north,half_layers=1,shape=inner_left": {
+      "model": "schnowy:block/snowed_diorite_stairs_inner1",
+      "uvlock": true,
+      "y": 180
+    },
+    "facing=north,half_layers=1,shape=inner_right": {
+      "model": "schnowy:block/snowed_diorite_stairs_inner1",
+      "uvlock": true,
+      "y": 270
+    },
+    "facing=north,half_layers=1,shape=outer_left": {
+      "model": "schnowy:block/snowed_diorite_stairs_outer1",
+      "uvlock": true,
+      "y": 180
+    },
+    "facing=north,half_layers=1,shape=outer_right": {
+      "model": "schnowy:block/snowed_diorite_stairs_outer1",
+      "uvlock": true,
+      "y": 270
+    },
+    "facing=north,half_layers=1,shape=straight": {
+      "model": "schnowy:block/snowed_diorite_stairs1",
+      "uvlock": true,
+      "y": 270
+    },
+    "facing=north,half_layers=2,shape=inner_left": {
+      "model": "schnowy:block/snowed_diorite_stairs_inner2",
+      "uvlock": true,
+      "y": 180
+    },
+    "facing=north,half_layers=2,shape=inner_right": {
+      "model": "schnowy:block/snowed_diorite_stairs_inner2",
+      "uvlock": true,
+      "y": 270
+    },
+    "facing=north,half_layers=2,shape=outer_left": {
+      "model": "schnowy:block/snowed_diorite_stairs_outer2",
+      "uvlock": true,
+      "y": 180
+    },
+    "facing=north,half_layers=2,shape=outer_right": {
+      "model": "schnowy:block/snowed_diorite_stairs_outer2",
+      "uvlock": true,
+      "y": 270
+    },
+    "facing=north,half_layers=2,shape=straight": {
+      "model": "schnowy:block/snowed_diorite_stairs2",
+      "uvlock": true,
+      "y": 270
+    },
+    "facing=north,half_layers=3,shape=inner_left": {
+      "model": "schnowy:block/snowed_diorite_stairs_inner3",
+      "uvlock": true,
+      "y": 180
+    },
+    "facing=north,half_layers=3,shape=inner_right": {
+      "model": "schnowy:block/snowed_diorite_stairs_inner3",
+      "uvlock": true,
+      "y": 270
+    },
+    "facing=north,half_layers=3,shape=outer_left": {
+      "model": "schnowy:block/snowed_diorite_stairs_outer3",
+      "uvlock": true,
+      "y": 180
+    },
+    "facing=north,half_layers=3,shape=outer_right": {
+      "model": "schnowy:block/snowed_diorite_stairs_outer3",
+      "uvlock": true,
+      "y": 270
+    },
+    "facing=north,half_layers=3,shape=straight": {
+      "model": "schnowy:block/snowed_diorite_stairs3",
+      "uvlock": true,
+      "y": 270
+    },
+    "facing=north,half_layers=4,shape=inner_left": {
+      "model": "schnowy:block/snowed_diorite_stairs_inner4",
+      "uvlock": true,
+      "y": 180
+    },
+    "facing=north,half_layers=4,shape=inner_right": {
+      "model": "schnowy:block/snowed_diorite_stairs_inner4",
+      "uvlock": true,
+      "y": 270
+    },
+    "facing=north,half_layers=4,shape=outer_left": {
+      "model": "schnowy:block/snowed_diorite_stairs_outer4",
+      "uvlock": true,
+      "y": 180
+    },
+    "facing=north,half_layers=4,shape=outer_right": {
+      "model": "schnowy:block/snowed_diorite_stairs_outer4",
+      "uvlock": true,
+      "y": 270
+    },
+    "facing=north,half_layers=4,shape=straight": {
+      "model": "schnowy:block/snowed_diorite_stairs4",
+      "uvlock": true,
+      "y": 270
+    },
+    "facing=south,half_layers=1,shape=inner_left": {
+      "model": "schnowy:block/snowed_diorite_stairs_inner1"
+    },
+    "facing=south,half_layers=1,shape=inner_right": {
+      "model": "schnowy:block/snowed_diorite_stairs_inner1",
+      "uvlock": true,
+      "y": 90
+    },
+    "facing=south,half_layers=1,shape=outer_left": {
+      "model": "schnowy:block/snowed_diorite_stairs_outer1"
+    },
+    "facing=south,half_layers=1,shape=outer_right": {
+      "model": "schnowy:block/snowed_diorite_stairs_outer1",
+      "uvlock": true,
+      "y": 90
+    },
+    "facing=south,half_layers=1,shape=straight": {
+      "model": "schnowy:block/snowed_diorite_stairs1",
+      "uvlock": true,
+      "y": 90
+    },
+    "facing=south,half_layers=2,shape=inner_left": {
+      "model": "schnowy:block/snowed_diorite_stairs_inner2"
+    },
+    "facing=south,half_layers=2,shape=inner_right": {
+      "model": "schnowy:block/snowed_diorite_stairs_inner2",
+      "uvlock": true,
+      "y": 90
+    },
+    "facing=south,half_layers=2,shape=outer_left": {
+      "model": "schnowy:block/snowed_diorite_stairs_outer2"
+    },
+    "facing=south,half_layers=2,shape=outer_right": {
+      "model": "schnowy:block/snowed_diorite_stairs_outer2",
+      "uvlock": true,
+      "y": 90
+    },
+    "facing=south,half_layers=2,shape=straight": {
+      "model": "schnowy:block/snowed_diorite_stairs2",
+      "uvlock": true,
+      "y": 90
+    },
+    "facing=south,half_layers=3,shape=inner_left": {
+      "model": "schnowy:block/snowed_diorite_stairs_inner3"
+    },
+    "facing=south,half_layers=3,shape=inner_right": {
+      "model": "schnowy:block/snowed_diorite_stairs_inner3",
+      "uvlock": true,
+      "y": 90
+    },
+    "facing=south,half_layers=3,shape=outer_left": {
+      "model": "schnowy:block/snowed_diorite_stairs_outer3"
+    },
+    "facing=south,half_layers=3,shape=outer_right": {
+      "model": "schnowy:block/snowed_diorite_stairs_outer3",
+      "uvlock": true,
+      "y": 90
+    },
+    "facing=south,half_layers=3,shape=straight": {
+      "model": "schnowy:block/snowed_diorite_stairs3",
+      "uvlock": true,
+      "y": 90
+    },
+    "facing=south,half_layers=4,shape=inner_left": {
+      "model": "schnowy:block/snowed_diorite_stairs_inner4"
+    },
+    "facing=south,half_layers=4,shape=inner_right": {
+      "model": "schnowy:block/snowed_diorite_stairs_inner4",
+      "uvlock": true,
+      "y": 90
+    },
+    "facing=south,half_layers=4,shape=outer_left": {
+      "model": "schnowy:block/snowed_diorite_stairs_outer4"
+    },
+    "facing=south,half_layers=4,shape=outer_right": {
+      "model": "schnowy:block/snowed_diorite_stairs_outer4",
+      "uvlock": true,
+      "y": 90
+    },
+    "facing=south,half_layers=4,shape=straight": {
+      "model": "schnowy:block/snowed_diorite_stairs4",
+      "uvlock": true,
+      "y": 90
+    },
+    "facing=west,half_layers=1,shape=inner_left": {
+      "model": "schnowy:block/snowed_diorite_stairs_inner1",
+      "uvlock": true,
+      "y": 90
+    },
+    "facing=west,half_layers=1,shape=inner_right": {
+      "model": "schnowy:block/snowed_diorite_stairs_inner1",
+      "uvlock": true,
+      "y": 180
+    },
+    "facing=west,half_layers=1,shape=outer_left": {
+      "model": "schnowy:block/snowed_diorite_stairs_outer1",
+      "uvlock": true,
+      "y": 90
+    },
+    "facing=west,half_layers=1,shape=outer_right": {
+      "model": "schnowy:block/snowed_diorite_stairs_outer1",
+      "uvlock": true,
+      "y": 180
+    },
+    "facing=west,half_layers=1,shape=straight": {
+      "model": "schnowy:block/snowed_diorite_stairs1",
+      "uvlock": true,
+      "y": 180
+    },
+    "facing=west,half_layers=2,shape=inner_left": {
+      "model": "schnowy:block/snowed_diorite_stairs_inner2",
+      "uvlock": true,
+      "y": 90
+    },
+    "facing=west,half_layers=2,shape=inner_right": {
+      "model": "schnowy:block/snowed_diorite_stairs_inner2",
+      "uvlock": true,
+      "y": 180
+    },
+    "facing=west,half_layers=2,shape=outer_left": {
+      "model": "schnowy:block/snowed_diorite_stairs_outer2",
+      "uvlock": true,
+      "y": 90
+    },
+    "facing=west,half_layers=2,shape=outer_right": {
+      "model": "schnowy:block/snowed_diorite_stairs_outer2",
+      "uvlock": true,
+      "y": 180
+    },
+    "facing=west,half_layers=2,shape=straight": {
+      "model": "schnowy:block/snowed_diorite_stairs2",
+      "uvlock": true,
+      "y": 180
+    },
+    "facing=west,half_layers=3,shape=inner_left": {
+      "model": "schnowy:block/snowed_diorite_stairs_inner3",
+      "uvlock": true,
+      "y": 90
+    },
+    "facing=west,half_layers=3,shape=inner_right": {
+      "model": "schnowy:block/snowed_diorite_stairs_inner3",
+      "uvlock": true,
+      "y": 180
+    },
+    "facing=west,half_layers=3,shape=outer_left": {
+      "model": "schnowy:block/snowed_diorite_stairs_outer3",
+      "uvlock": true,
+      "y": 90
+    },
+    "facing=west,half_layers=3,shape=outer_right": {
+      "model": "schnowy:block/snowed_diorite_stairs_outer3",
+      "uvlock": true,
+      "y": 180
+    },
+    "facing=west,half_layers=3,shape=straight": {
+      "model": "schnowy:block/snowed_diorite_stairs3",
+      "uvlock": true,
+      "y": 180
+    },
+    "facing=west,half_layers=4,shape=inner_left": {
+      "model": "schnowy:block/snowed_diorite_stairs_inner4",
+      "uvlock": true,
+      "y": 90
+    },
+    "facing=west,half_layers=4,shape=inner_right": {
+      "model": "schnowy:block/snowed_diorite_stairs_inner4",
+      "uvlock": true,
+      "y": 180
+    },
+    "facing=west,half_layers=4,shape=outer_left": {
+      "model": "schnowy:block/snowed_diorite_stairs_outer4",
+      "uvlock": true,
+      "y": 90
+    },
+    "facing=west,half_layers=4,shape=outer_right": {
+      "model": "schnowy:block/snowed_diorite_stairs_outer4",
+      "uvlock": true,
+      "y": 180
+    },
+    "facing=west,half_layers=4,shape=straight": {
+      "model": "schnowy:block/snowed_diorite_stairs4",
+      "uvlock": true,
+      "y": 180
+    }
+  }
+}

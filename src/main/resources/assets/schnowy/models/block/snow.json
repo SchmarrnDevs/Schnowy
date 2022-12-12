@@ -1,0 +1,21 @@
+{
+	"credit": "Made with Blockbench",
+    "textures": {
+        "snow": "block/snow"
+    },
+	"elements": [
+		{
+			"from": [0.0001, 0.0001, 0.0001],
+			"to": [15.9999, 15.9998, 15.9999],
+			"color": 5,
+			"faces": {
+				"north": {"uv": [0, 0, 15.9998, 15.9997], "texture": "#snow"},
+				"east": {"uv": [0, 0, 15.9998, 15.9997], "texture": "#snow"},
+				"south": {"uv": [0, 0, 15.9998, 15.9997], "texture": "#snow"},
+				"west": {"uv": [0, 0, 15.9998, 15.9997], "texture": "#snow"},
+				"up": {"uv": [0, 0, 15.9998, 15.9998], "texture": "#snow"},
+				"down": {"uv": [0, 0, 15.9998, 15.9998], "texture": "#snow"}
+			}
+		}
+	]
+}

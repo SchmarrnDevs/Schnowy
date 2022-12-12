@@ -1,0 +1,54 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"particle": "#side",
+        "snow": "block/snow"
+	},
+	"elements": [
+		{
+			"from": [8, 8, 8],
+			"to": [16, 16, 16],
+			"faces": {
+				"north": {"uv": [0, 0, 8, 8], "texture": "#side"},
+				"east": {"uv": [0, 0, 8, 8], "texture": "#side", "cullface": "east"},
+				"south": {"uv": [8, 0, 16, 8], "texture": "#side", "cullface": "south"},
+				"west": {"uv": [8, 0, 16, 8], "texture": "#side"},
+				"up": {"uv": [8, 8, 16, 16], "texture": "#top", "cullface": "up"}
+			}
+		},
+		{
+			"from": [0, 0, 0],
+			"to": [16, 8, 16],
+			"faces": {
+				"north": {"uv": [0, 8, 16, 16], "texture": "#side", "cullface": "north"},
+				"east": {"uv": [0, 8, 16, 16], "texture": "#side", "cullface": "east"},
+				"south": {"uv": [0, 8, 16, 16], "texture": "#side", "cullface": "south"},
+				"west": {"uv": [0, 8, 16, 16], "texture": "#side", "cullface": "west"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#bottom", "cullface": "down"}
+			}
+		},
+		{
+			"name": "snow",
+			"from": [8, 8, 0],
+			"to": [16, 10, 8],
+			"color": 7,
+			"faces": {
+				"north": {"uv": [0, 0, 8, 2], "texture": "#snow"},
+				"east": {"uv": [8, 0, 16, 2], "texture": "#snow"},
+				"up": {"uv": [8, 0, 16, 8], "texture": "#snow"}
+			}
+		},
+		{
+			"name": "snow",
+			"from": [0, 8, 0],
+			"to": [8, 10, 16],
+			"color": 7,
+			"faces": {
+				"north": {"uv": [8, 0, 16, 2], "texture": "#snow"},
+				"south": {"uv": [0, 0, 8, 2], "texture": "#snow"},
+				"west": {"uv": [0, 0, 16, 2], "texture": "#snow"},
+				"up": {"uv": [0, 0, 8, 16], "texture": "#snow"}
+			}
+		}
+	]
+}
