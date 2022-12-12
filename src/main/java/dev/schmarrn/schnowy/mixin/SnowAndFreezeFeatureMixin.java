@@ -34,8 +34,7 @@ public class SnowAndFreezeFeatureMixin {
 			)
 	)
 	public boolean schnowy$place(Biome instance, LevelReader world, BlockPos blockPos) {
-		WorldGenLevel level = (WorldGenLevel) world;
-		if (instance.shouldSnow(world, blockPos)) {
+		if (world instanceof WorldGenLevel level && instance.shouldSnow(world, blockPos)) {
 			@Nullable BlockState stateWithSnow = ReplaceableBlocks.withSnow(level.getBlockState(blockPos));
 			if (stateWithSnow != null) {
 				level.setBlock(blockPos, stateWithSnow, 2);
