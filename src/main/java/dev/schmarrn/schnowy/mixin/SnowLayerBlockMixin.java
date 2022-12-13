@@ -101,7 +101,7 @@ public class SnowLayerBlockMixin {
 				if (snowlogged.hasProperty(LAYERS)) {
 					// We can fit 8 layers into it - the most that can be dropped are technically seven layers, so it can
 					// fit into this block no problem
-					level.setBlockAndUpdate(belowPos, belowState.setValue(LAYERS, layers));
+					level.setBlockAndUpdate(belowPos, snowlogged.setValue(LAYERS, layers));
 				} else if (snowlogged.hasProperty(SchnowyProperties.HALF_LAYERS)) {
 					// now we could run into problems
 					if (layers <= 4) {
