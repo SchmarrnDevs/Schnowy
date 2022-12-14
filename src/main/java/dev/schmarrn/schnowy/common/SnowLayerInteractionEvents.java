@@ -70,6 +70,10 @@ public class SnowLayerInteractionEvents implements PlayerBlockBreakEvents.Before
 			} else {
 				world.setBlock(pos, Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL);
 			}
+			if (player instanceof ServerPlayer serverPlayer && !serverPlayer.gameMode.isCreative()) {
+				Block.popResource(world, pos, Items.SNOWBALL.getDefaultInstance());
+				player.getMainHandItem().hurtAndBreak(1, player, p -> p.broadcastBreakEvent(player.getUsedItemHand()));
+			}
 			return false;
 		}
 		return true;
@@ -100,7 +104,8 @@ public class SnowLayerInteractionEvents implements PlayerBlockBreakEvents.Before
 					int layers = state.getValue(BlockStateProperties.LAYERS);
 					if (layers < 8) {
 						world.setBlock(hitResult.getBlockPos(), state.setValue(BlockStateProperties.LAYERS, layers + 1), Block.UPDATE_ALL);
-						itemStack.shrink(1);
+						if (player instanceof ServerPlayer serverPlayer && !serverPlayer.gameMode.isCreative())
+							itemStack.shrink(1);
 						return InteractionResult.sidedSuccess(world.isClientSide());
 					}
 				}
