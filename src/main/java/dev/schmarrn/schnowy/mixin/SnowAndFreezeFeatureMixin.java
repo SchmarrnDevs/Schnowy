@@ -49,6 +49,10 @@ public class SnowAndFreezeFeatureMixin {
 					level.setBlock(below, belowStateWithSnow, 2);
 				} else {
 					level.setBlock(blockPos, Blocks.SNOW.defaultBlockState(), 2);
+					BlockState belowState = level.getBlockState(blockPos.below());
+					if (belowState.hasProperty(SnowyDirtBlock.SNOWY)) {
+						level.setBlock(blockPos.below(), belowState.setValue(SnowyDirtBlock.SNOWY, true), 2);
+					}
 				}
 			}
 		}
