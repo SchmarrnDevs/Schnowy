@@ -2,19 +2,18 @@ package dev.schmarrn.schnowy.common.blocks;
 
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.FlowerBlock;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.Material;
-import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -40,7 +39,7 @@ public class SnowedFlower extends FlowerBlock {
 	public final FlowerBlock parent;
 
 	public SnowedFlower(FlowerBlock parent) {
-		super(parent.getSuspiciousStewEffect(), parent.getEffectDuration(), BlockBehaviour.Properties.of(Material.SNOW).strength(0.2F).sound(SoundType.SNOW));
+		super(parent.getSuspiciousStewEffect(), parent.getEffectDuration(), BlockBehaviour.Properties.of(Material.SNOW).requiresCorrectToolForDrops().strength(0.2F).sound(SoundType.SNOW));
 		this.parent = parent;
 	}
 

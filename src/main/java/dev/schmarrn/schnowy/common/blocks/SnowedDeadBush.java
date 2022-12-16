@@ -36,7 +36,7 @@ public class SnowedDeadBush extends DeadBushBlock {
 	});
 
 	public SnowedDeadBush() {
-		super(BlockBehaviour.Properties.of(Material.SNOW).requiresCorrectToolForDrops().strength(0.2f).sound(SoundType.SNOW));
+		super(BlockBehaviour.Properties.of(Material.SNOW).requiresCorrectToolForDrops().strength(0.2F).sound(SoundType.SNOW));
 	}
 
 	@Override
