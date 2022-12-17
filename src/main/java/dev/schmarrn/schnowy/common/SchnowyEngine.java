@@ -13,7 +13,6 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SnowLayerBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.levelgen.Heightmap;
 import org.jetbrains.annotations.Nullable;
@@ -218,20 +217,30 @@ public class SchnowyEngine {
 		boolean active;
 		int time;
 		Random random = new Random();
+
+		private void setTimeUntilNextBlizzard() {
+			this.time = random.nextInt(40*60*20) + 100*60*20;
+		}
+
+		private void setTimeDuration() {
+			this.time = random.nextInt(10*60*20) + 15*60*20;
+		}
+
 		private Blizzard() {
 			this.active = false;
-			this.time = random.nextInt(40*60*20) * 100*60*20;
+			setTimeUntilNextBlizzard();
 		}
+
 		private void tick(MinecraftServer server) {
 			time--;
 			if (time == 0) {
 				if (active) {
 					active = false;
-					this.time = random.nextInt(40*60*20) * 100*60*20;
+					setTimeUntilNextBlizzard();
 					server.sendSystemMessage(Component.translatable("announcement.schnowy.blizzard.stop"));
 				} else {
 					active = true;
-					this.time = random.nextInt(10*60*20) + 15*60*20;
+					setTimeDuration();
 					server.sendSystemMessage(Component.translatable("announcement.schnowy.blizzard.start"));
 				}
 			}
