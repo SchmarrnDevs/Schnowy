@@ -29,7 +29,11 @@ public class SnowedSlab extends Block {
 	public final Block textureParent;
 
 	public SnowedSlab(Block parent, Block textureParent) {
-		super(Properties.copy(parent).strength(Blocks.SNOW.defaultDestroyTime(), Blocks.SNOW.getExplosionResistance()).requiresCorrectToolForDrops().sound(SoundType.SNOW));
+		super(Properties.copy(parent)
+				.strength(Blocks.SNOW.defaultDestroyTime(), Blocks.SNOW.getExplosionResistance())
+				.requiresCorrectToolForDrops()
+				.sound(SoundType.SNOW)
+		);
 		this.parent = parent;
 		this.textureParent = textureParent;
 	}

@@ -3,6 +3,7 @@ package dev.schmarrn.schnowy.common.blocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -17,7 +18,14 @@ public class SnowedStair extends StairBlock {
 
 	public final Block textureParent;
 	public SnowedStair(Block textureParent) {
-		super(textureParent.defaultBlockState(), BlockBehaviour.Properties.of(Material.SNOW).requiresCorrectToolForDrops().strength(0.2F).sound(SoundType.SNOW).noOcclusion());
+		super(
+				textureParent.defaultBlockState(),
+				BlockBehaviour.Properties.of(Material.SNOW)
+						.requiresCorrectToolForDrops()
+						.strength(Blocks.SNOW.defaultDestroyTime(), Blocks.SNOW.getExplosionResistance())
+						.sound(SoundType.SNOW)
+						.noOcclusion()
+		);
 		this.textureParent = textureParent;
 	}
 

@@ -39,7 +39,14 @@ public class SnowedFlower extends FlowerBlock {
 	public final FlowerBlock parent;
 
 	public SnowedFlower(FlowerBlock parent) {
-		super(parent.getSuspiciousStewEffect(), parent.getEffectDuration(), BlockBehaviour.Properties.of(Material.SNOW).requiresCorrectToolForDrops().strength(0.2F).sound(SoundType.SNOW));
+		super(
+				parent.getSuspiciousStewEffect(),
+				parent.getEffectDuration(),
+				BlockBehaviour.Properties.of(Material.SNOW)
+						.requiresCorrectToolForDrops()
+						.strength(Blocks.SNOW.defaultDestroyTime(), Blocks.SNOW.getExplosionResistance())
+						.sound(SoundType.SNOW)
+		);
 		this.parent = parent;
 	}
 

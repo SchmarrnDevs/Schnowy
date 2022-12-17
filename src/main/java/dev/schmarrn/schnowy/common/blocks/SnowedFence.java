@@ -18,7 +18,12 @@ public class SnowedFence extends FenceBlock {
 	public final Block parent;
 
 	public SnowedFence(Block parent) {
-		super(BlockBehaviour.Properties.of(Material.SNOW).requiresCorrectToolForDrops().strength(0.2F).sound(SoundType.SNOW).noOcclusion());
+		super(BlockBehaviour.Properties.of(Material.SNOW)
+				.requiresCorrectToolForDrops()
+				.strength(Blocks.SNOW.defaultDestroyTime(), Blocks.SNOW.getExplosionResistance())
+				.sound(SoundType.SNOW)
+				.noOcclusion()
+		);
 		this.parent = parent;
 	}
 
