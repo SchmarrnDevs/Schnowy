@@ -26,7 +26,16 @@ public class ReplaceableBlocks {
 
 	@Nullable
 	public static BlockState withSnow(BlockState state) {
-		Block block = ReplaceableBlocks.BLOCKS.stream().filter(replacement -> state.is(replacement.withoutSnow())).filter(replacement -> replacement.isSnowable().test(state)).findFirst().map(Replacement::withSnow).orElse(null);
+		@Nullable
+		Block block = null;
+		for (Replacement replacement: BLOCKS) {
+			if (state.is(replacement.withoutSnow())) {
+				if (replacement.isSnowable().test(state))
+					return null;
+				block = replacement.withSnow();
+				break;
+			}
+		}
 		if (block != null) {
 			BlockState without = block.defaultBlockState();
 			for (Property<?> prop: state.getProperties()) {
@@ -39,7 +48,14 @@ public class ReplaceableBlocks {
 
 	@Nullable
 	public static BlockState withoutSnow(BlockState state) {
-		Block block = ReplaceableBlocks.BLOCKS.stream().filter(replacement -> state.is(replacement.withSnow())).findFirst().map(Replacement::withoutSnow).orElse(null);
+		@Nullable
+		Block block = null;
+		for (Replacement replacement: BLOCKS) {
+			if (state.is(replacement.withSnow())) {
+				block = replacement.withoutSnow();
+				break;
+			}
+		}
 		if (block != null) {
 			BlockState without = block.defaultBlockState();
 			for (Property<?> prop: state.getProperties()) {
@@ -48,6 +64,24 @@ public class ReplaceableBlocks {
 			return without;
 		}
 		return null;
+	}
+
+	public static boolean shouldMoveDown(BlockState state) {
+		for (Replacement replacement: BLOCKS) {
+			if (state.is(replacement.withoutSnow())) {
+				return !replacement.moveDown();
+			}
+		}
+		return false;
+	}
+
+	public static boolean isSchnowySnow(BlockState state) {
+		for (Replacement replacement: BLOCKS) {
+			if (state.is(replacement.withSnow())) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private static <T extends Comparable<T>> BlockState with(BlockState on, BlockState from, Property<T> prop) {
