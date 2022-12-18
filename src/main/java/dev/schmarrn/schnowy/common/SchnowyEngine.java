@@ -146,11 +146,7 @@ public class SchnowyEngine {
 		return state.is(Blocks.SNOW_BLOCK)
 				|| state.hasProperty(SnowLayerBlock.LAYERS)
 				|| state.hasProperty(SchnowyProperties.HALF_LAYERS)
-				|| ReplaceableBlocks.BLOCKS.stream()
-					.filter(replacement -> state.is(replacement.withoutSnow()))
-					.findFirst()
-					.map(replacement -> !replacement.moveDown())
-					.orElse(false);
+				|| ReplaceableBlocks.shouldMoveDown(state);
 	}
 
 	public static float snowSpeed(ServerLevel level) {
@@ -199,7 +195,7 @@ public class SchnowyEngine {
 	}
 
 	public static boolean isFullSnowLogged(BlockState state) {
-		if (ReplaceableBlocks.BLOCKS.stream().map(Replacement::withSnow).toList().contains(state.getBlock())) {
+		if (ReplaceableBlocks.isSchnowySnow(state)) {
 			if (state.hasProperty(SchnowyProperties.HALF_LAYERS) && state.getValue(SchnowyProperties.HALF_LAYERS) == 4)
 				return true;
 			if (state.hasProperty(SnowLayerBlock.LAYERS) && state.getValue(SnowLayerBlock.LAYERS) == 8)
