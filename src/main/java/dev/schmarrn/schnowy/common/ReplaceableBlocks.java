@@ -30,6 +30,8 @@ public class ReplaceableBlocks {
 		Block block = null;
 		for (Replacement replacement: BLOCKS) {
 			if (state.is(replacement.withoutSnow())) {
+				if (replacement.isSnowable().test(state))
+					return null;
 				block = replacement.withSnow();
 				break;
 			}
