@@ -7,6 +7,7 @@ import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -70,7 +71,7 @@ public class SnowLayerInteractionEvents implements PlayerBlockBreakEvents.Before
 			} else {
 				world.setBlock(pos, Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL);
 			}
-			if (player instanceof ServerPlayer serverPlayer && !serverPlayer.gameMode.isCreative()) {
+			if (player instanceof ServerPlayer serverPlayer && !serverPlayer.gameMode.isCreative() && player.getMainHandItem().isCorrectToolForDrops(state)) {
 				Block.popResource(world, pos, Items.SNOWBALL.getDefaultInstance());
 				player.getMainHandItem().hurtAndBreak(1, player, p -> p.broadcastBreakEvent(player.getUsedItemHand()));
 			}
