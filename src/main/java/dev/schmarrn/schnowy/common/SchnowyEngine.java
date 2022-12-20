@@ -167,7 +167,7 @@ public class SchnowyEngine {
 	public static void tickChunk(ServerLevel level, LevelChunk chunk, int randomTickSpeed) {
 		ChunkPos chunkPos = chunk.getPos();
 		if (level.random.nextFloat() * snowSpeed(level) > 0.5f && level.isRaining()) {
-			BlockPos pos = level.getHeightmapPos(Heightmap.Types.WORLD_SURFACE, level.getBlockRandomPos(chunkPos.getMinBlockX(), 0, chunkPos.getMinBlockZ(), 15)).below();
+			BlockPos pos = level.getHeightmapPos(Heightmap.Types.WORLD_SURFACE, level.getBlockRandomPos(chunkPos.getMinBlockX(), 0, chunkPos.getMinBlockZ(), 15));
 			Biome biome = level.getBiome(pos).value();
 			pos = findLowestLayerPos(level, pos, 512);
 			if (level.getBlockState(pos).isAir() && isFullSnowLogged(level.getBlockState(pos.below())))

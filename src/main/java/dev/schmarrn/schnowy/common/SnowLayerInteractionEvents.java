@@ -70,7 +70,7 @@ public class SnowLayerInteractionEvents implements PlayerBlockBreakEvents.Before
 			} else {
 				world.setBlock(pos, Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL);
 			}
-			if (player instanceof ServerPlayer serverPlayer && !serverPlayer.gameMode.isCreative()) {
+			if (player instanceof ServerPlayer serverPlayer && !serverPlayer.gameMode.isCreative() && player.getMainHandItem().isCorrectToolForDrops(state)) {
 				Block.popResource(world, pos, Items.SNOWBALL.getDefaultInstance());
 				player.getMainHandItem().hurtAndBreak(1, player, p -> p.broadcastBreakEvent(player.getUsedItemHand()));
 			}
