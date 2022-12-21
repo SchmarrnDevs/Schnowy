@@ -1,14 +1,13 @@
 package dev.schmarrn.schnowy.mixin;
 
-import dev.schmarrn.schnowy.Schnowy;
 import dev.schmarrn.schnowy.common.ReplaceableBlocks;
+import dev.schmarrn.schnowy.common.SchnowyEngine;
 import dev.schmarrn.schnowy.common.blocks.SchnowyProperties;
-import dev.schmarrn.schnowy.common.blocks.SnowedSlab;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SnowLayerBlock;
 import net.minecraft.world.level.block.state.BlockState;
@@ -16,12 +15,6 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
-import dev.schmarrn.schnowy.common.SchnowyEngine;
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.SnowLayerBlock;
-import net.minecraft.world.level.block.state.BlockState;
-import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -125,8 +118,10 @@ public class SnowLayerBlockMixin {
 				}
 
 			} else {
-				// If we do not have a snowloggable block, place the snow above the lower block
-				level.setBlockAndUpdate(belowPos.above(), state);
+				// If we do not have a snowloggable block, place the snow above the lower block if the snow can survive on it
+				if (state.canSurvive(level, belowPos.above())) {
+					level.setBlockAndUpdate(belowPos.above(), state);
+				}
 				cir.setReturnValue(Blocks.AIR.defaultBlockState());
 			}
 		}
