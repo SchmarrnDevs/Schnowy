@@ -2,6 +2,7 @@ package dev.schmarrn.schnowy.mixin;
 
 import dev.schmarrn.schnowy.Schnowy;
 import dev.schmarrn.schnowy.common.ReplaceableBlocks;
+import dev.schmarrn.schnowy.common.blocks.SchnowyBlocks;
 import dev.schmarrn.schnowy.common.blocks.SchnowyProperties;
 import dev.schmarrn.schnowy.common.blocks.SnowedSlab;
 import net.minecraft.core.BlockPos;
@@ -125,8 +126,10 @@ public class SnowLayerBlockMixin {
 				}
 
 			} else {
-				// If we do not have a snowloggable block, place the snow above the lower block
-				level.setBlockAndUpdate(belowPos.above(), state);
+				// If we do not have a snowloggable block, place the snow above the lower block if the snow can survive on it
+				if (state.canSurvive(level, belowPos.above())) {
+					level.setBlockAndUpdate(belowPos.above(), state);
+				}
 				cir.setReturnValue(Blocks.AIR.defaultBlockState());
 			}
 		}
