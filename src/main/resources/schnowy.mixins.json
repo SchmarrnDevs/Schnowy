@@ -4,11 +4,14 @@
   "package": "dev.schmarrn.schnowy.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "BeehiveBlockEntityMixin",
+    "BeeMixin",
+    "BeePollinateGoalMixin",
     "BiomeMixin",
+    "EnchantmentHelperMixin",
     "ServerLevelMixin",
     "SnowAndFreezeFeatureMixin",
-    "SnowLayerBlockMixin",
-    "EnchantmentHelperMixin"
+    "SnowLayerBlockMixin"
   ],
   "client": [
     "MultiPlayerGameModeMixin",

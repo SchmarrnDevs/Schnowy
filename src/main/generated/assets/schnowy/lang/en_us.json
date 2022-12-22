@@ -1,5 +1,6 @@
 {
   "announcement.schnowy.blizzard.start": "A blizzard is coming! Seek shelter!",
   "announcement.schnowy.blizzard.stop": "The blizzard is over! It is save to come out again.",
-  "enchantment.schnowy.snow_clearing": "Snow Clearing"
+  "enchantment.schnowy.snow_clearing": "Snow Clearing",
+  "gamerule.schnowyBee": "Bees are allowed to get out while it rains/snows"
 }
