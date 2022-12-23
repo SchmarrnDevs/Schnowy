@@ -2,6 +2,7 @@ package dev.schmarrn.schnowy;
 
 import dev.schmarrn.schnowy.common.PlayerJoinEvent;
 import dev.schmarrn.schnowy.common.SchnowyEngine;
+import dev.schmarrn.schnowy.common.SchnowyGameRules;
 import dev.schmarrn.schnowy.common.SnowLayerInteractionEvents;
 import dev.schmarrn.schnowy.common.blocks.SchnowyBlocks;
 import dev.schmarrn.schnowy.common.enchantments.Enchantments;
@@ -25,13 +26,15 @@ public class Schnowy implements ModInitializer {
 	// That way, it's clear which mod wrote info, warnings, and errors.
 	public static final Logger LOGGER = LoggerFactory.getLogger("Schnowy");
 
-	public static String MODID = "";
+	public static String
+			MODID = "";
 	@Override
 	public void onInitialize(ModContainer mod) {
 		LOGGER.info("Ho Ho Ho, let's get {}!", mod.metadata().name());
 		MODID = mod.metadata().id();
 		Enchantments.init();
 		SchnowyBlocks.init();
+		SchnowyGameRules.init();
 		SnowLayerInteractionEvents.getInstance();
 		SchnowyEngine.initialize();
 

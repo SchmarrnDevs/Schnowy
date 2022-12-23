@@ -14,5 +14,6 @@ public class LanguageProvider extends FabricLanguageProvider {
 		translationBuilder.add(Enchantments.SNOW_CLEARING, "Snow Clearing");
 		translationBuilder.add("announcement.schnowy.blizzard.start", "A blizzard is coming! Seek shelter!");
 		translationBuilder.add("announcement.schnowy.blizzard.stop", "The blizzard is over! It is save to come out again.");
+		translationBuilder.add("gamerule.schnowyBee", "Bees are allowed to get out while it rains/snows");
 	}
 }
