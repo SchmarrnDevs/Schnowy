@@ -13,7 +13,6 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -40,9 +39,9 @@ public class SnowedFlower extends FlowerBlock {
 
 	public SnowedFlower(FlowerBlock parent) {
 		super(
-				parent.getSuspiciousStewEffect(),
+				parent.getSuspiciousEffect(),
 				parent.getEffectDuration(),
-				BlockBehaviour.Properties.of(Material.SNOW)
+				BlockBehaviour.Properties.copy(Blocks.SNOW)
 						.requiresCorrectToolForDrops()
 						.strength(Blocks.SNOW.defaultDestroyTime(), Blocks.SNOW.getExplosionResistance())
 						.sound(SoundType.SNOW)

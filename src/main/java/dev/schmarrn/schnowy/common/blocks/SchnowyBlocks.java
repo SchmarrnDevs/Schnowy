@@ -3,6 +3,7 @@ package dev.schmarrn.schnowy.common.blocks;
 import dev.schmarrn.schnowy.Schnowy;
 import net.minecraft.Util;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.BlockFamilies;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.resources.ResourceLocation;
@@ -29,10 +30,10 @@ public class SchnowyBlocks {
 		return map;
 	});
 	public static void init() {
-		Registry.BLOCK.stream()
+		BuiltInRegistries.BLOCK.stream()
 				.filter(FlowerBlock.class::isInstance)
 				.map(FlowerBlock.class::cast)
-				.filter(block -> Registry.BLOCK.getKey(block).getNamespace().equals("minecraft")).forEach(SchnowyBlocks::createFlower);
+				.filter(block -> BuiltInRegistries.BLOCK.getKey(block).getNamespace().equals("minecraft")).forEach(SchnowyBlocks::createFlower);
 
 		BlockFamilies.getAllFamilies().forEach(family -> {
 			Block slab = family.get(BlockFamily.Variant.SLAB);
@@ -56,35 +57,35 @@ public class SchnowyBlocks {
 
 		createGrass((TallGrassBlock) Blocks.GRASS);
 		createGrass((TallGrassBlock) Blocks.FERN);
-		Registry.register(Registry.BLOCK, new ResourceLocation(Schnowy.MODID, "snowed_dead_bush"), SNOWED_DEAD_BUSH);
+		Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(Schnowy.MODID, "snowed_dead_bush"), SNOWED_DEAD_BUSH);
 	}
 
 	public static void createGrass(TallGrassBlock parent) {
 		SnowedGrass snowed = new SnowedGrass(parent);
 		SNOWED_GRASS.put(parent, snowed);
-		Registry.register(Registry.BLOCK, new ResourceLocation(Schnowy.MODID, "snowed_" + Registry.BLOCK.getKey(parent).getPath()), snowed);
+		Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(Schnowy.MODID, "snowed_" + BuiltInRegistries.BLOCK.getKey(parent).getPath()), snowed);
 	}
 
 	public static void createFlower(FlowerBlock flowerReplacement) {
 		SnowedFlower flower = new SnowedFlower(flowerReplacement);
 		FLOWERS.put(flowerReplacement, flower);
-		Registry.register(Registry.BLOCK, new ResourceLocation(Schnowy.MODID, "snowed_" + Registry.BLOCK.getKey(flowerReplacement).getPath()), flower);
+		Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(Schnowy.MODID, "snowed_" + BuiltInRegistries.BLOCK.getKey(flowerReplacement).getPath()), flower);
 	}
 
 	public static void createSlab(Block slabReplacement, Block fullBlock) {
 		SnowedSlab slab = new SnowedSlab(fullBlock, textureRedirects.getOrDefault(fullBlock, fullBlock));
 		SLABS.put(slabReplacement, slab);
-		Registry.register(Registry.BLOCK, new ResourceLocation(Schnowy.MODID, "snowed_" + Registry.BLOCK.getKey(slabReplacement).getPath()), slab);
+		Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(Schnowy.MODID, "snowed_" + BuiltInRegistries.BLOCK.getKey(slabReplacement).getPath()), slab);
 	}
 	public static void createStair(Block stair, Block fullBlock) {
 		SnowedStair snowedStair = new SnowedStair(textureRedirects.getOrDefault(fullBlock, fullBlock));
 		STAIRS.put(stair, snowedStair);
-		Registry.register(Registry.BLOCK, new ResourceLocation(Schnowy.MODID, "snowed_" + Registry.BLOCK.getKey(stair).getPath()), snowedStair);
+		Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(Schnowy.MODID, "snowed_" + BuiltInRegistries.BLOCK.getKey(stair).getPath()), snowedStair);
 	}
 
 	public static void createFence(Block fence, Block textureParent) {
 		SnowedFence slab = new SnowedFence(textureParent);
 		FENCES.put(fence, slab);
-		Registry.register(Registry.BLOCK, new ResourceLocation(Schnowy.MODID, "snowed_" + Registry.BLOCK.getKey(fence).getPath()), slab);
+		Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(Schnowy.MODID, "snowed_" + BuiltInRegistries.BLOCK.getKey(fence).getPath()), slab);
 	}
 }

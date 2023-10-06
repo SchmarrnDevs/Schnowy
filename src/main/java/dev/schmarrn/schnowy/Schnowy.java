@@ -46,7 +46,7 @@ public class Schnowy implements ModInitializer {
 						ModificationPhase.POST_PROCESSING,
 						selectionContext -> !BiomeSelectors.foundInTheNether().test(selectionContext),
 						modificationContext -> {
-							modificationContext.getWeather().setPrecipitation(Biome.Precipitation.SNOW);
+							modificationContext.getWeather().setHasPrecipitation(true);
 							modificationContext.getWeather().setTemperature(-0.5f);
 							modificationContext.getWeather().setDownfall(0.4f);
 						});

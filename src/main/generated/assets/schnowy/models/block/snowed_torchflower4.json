@@ -1,0 +1,6 @@
+{
+  "parent": "schnowy:block/cross4",
+  "textures": {
+    "cross": "minecraft:block/torchflower"
+  }
+}

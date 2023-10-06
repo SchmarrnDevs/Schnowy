@@ -185,7 +185,7 @@ public class SchnowyEngine {
 			}
 
 			// cauldron filling
-			state.getBlock().handlePrecipitation(state, level, pos, biome.getPrecipitation());
+			state.getBlock().handlePrecipitation(state, level, pos, biome.getPrecipitationAt(pos));
 		}
 	}
 

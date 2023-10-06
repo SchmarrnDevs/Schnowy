@@ -9,7 +9,6 @@ import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -20,7 +19,7 @@ public class SnowedStair extends StairBlock {
 	public SnowedStair(Block textureParent) {
 		super(
 				textureParent.defaultBlockState(),
-				BlockBehaviour.Properties.of(Material.SNOW)
+				BlockBehaviour.Properties.copy(Blocks.SNOW)
 						.requiresCorrectToolForDrops()
 						.strength(Blocks.SNOW.defaultDestroyTime(), Blocks.SNOW.getExplosionResistance())
 						.sound(SoundType.SNOW)

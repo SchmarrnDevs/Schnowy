@@ -13,7 +13,6 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -41,7 +40,7 @@ public class SnowedGrass extends TallGrassBlock {
 	public final TallGrassBlock parent;
 
 	public SnowedGrass(TallGrassBlock parent) {
-		super(BlockBehaviour.Properties.of(Material.SNOW)
+		super(BlockBehaviour.Properties.copy(Blocks.SNOW)
 				.requiresCorrectToolForDrops()
 				.strength(Blocks.SNOW.defaultDestroyTime(), Blocks.SNOW.getExplosionResistance())
 				.sound(SoundType.SNOW)

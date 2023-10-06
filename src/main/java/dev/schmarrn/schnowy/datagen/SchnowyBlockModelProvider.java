@@ -2,7 +2,7 @@ package dev.schmarrn.schnowy.datagen;
 
 import dev.schmarrn.schnowy.Schnowy;
 import dev.schmarrn.schnowy.common.blocks.*;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
+import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.Util;
 import net.minecraft.core.Direction;
@@ -21,7 +21,7 @@ import java.util.Map;
 import java.util.Optional;
 
 public class SchnowyBlockModelProvider extends FabricModelProvider {
-	public SchnowyBlockModelProvider(FabricDataGenerator dataGenerator) {
+	public SchnowyBlockModelProvider(FabricDataOutput dataGenerator) {
 		super(dataGenerator);
 	}
 
