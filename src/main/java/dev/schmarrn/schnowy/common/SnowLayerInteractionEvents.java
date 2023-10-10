@@ -96,7 +96,8 @@ public class SnowLayerInteractionEvents implements PlayerBlockBreakEvents.Before
 			BlockState withSnow = ReplaceableBlocks.withSnow(state);
 			if (withSnow != null) {
 				world.setBlock(hitResult.getBlockPos(), withSnow, Block.UPDATE_ALL);
-				itemStack.shrink(1);
+				if (player instanceof ServerPlayer serverPlayer && !serverPlayer.gameMode.isCreative())
+					itemStack.shrink(1);
 				return InteractionResult.sidedSuccess(world.isClientSide());
 			}
 			if (!state.is(Blocks.SNOW) && (state.hasProperty(BlockStateProperties.LAYERS) || state.hasProperty(SchnowyProperties.HALF_LAYERS))) {
@@ -113,7 +114,8 @@ public class SnowLayerInteractionEvents implements PlayerBlockBreakEvents.Before
 					int layers = state.getValue(SchnowyProperties.HALF_LAYERS);
 					if (layers < 4) {
 						world.setBlock(hitResult.getBlockPos(), state.setValue(SchnowyProperties.HALF_LAYERS, layers + 1), Block.UPDATE_ALL);
-						itemStack.shrink(1);
+						if (player instanceof ServerPlayer serverPlayer && !serverPlayer.gameMode.isCreative())
+							itemStack.shrink(1);
 						return InteractionResult.sidedSuccess(world.isClientSide());
 					}
 				}
