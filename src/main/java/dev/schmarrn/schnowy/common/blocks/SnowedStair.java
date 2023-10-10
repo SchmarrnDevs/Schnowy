@@ -16,10 +16,10 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 public class SnowedStair extends StairBlock {
 
 	public final Block textureParent;
-	public SnowedStair(Block textureParent) {
+	public SnowedStair(Block parent, Block textureParent) {
 		super(
 				textureParent.defaultBlockState(),
-				BlockBehaviour.Properties.copy(Blocks.SNOW)
+				BlockBehaviour.Properties.copy(parent)
 						.requiresCorrectToolForDrops()
 						.strength(Blocks.SNOW.defaultDestroyTime(), Blocks.SNOW.getExplosionResistance())
 						.sound(SoundType.SNOW)
