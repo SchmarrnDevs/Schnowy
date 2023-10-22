@@ -1,6 +1,5 @@
 package dev.schmarrn.schnowy.common.blocks;
 
-import dev.schmarrn.schnowy.common.duck.BlockPropertiesDuck;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
@@ -41,11 +40,10 @@ public class SnowedGrass extends TallGrassBlock implements SchnowyBlockInterface
 	public final TallGrassBlock parent;
 
 	public SnowedGrass(TallGrassBlock parent) {
-		super(((BlockPropertiesDuck) (Properties.copy(Blocks.SNOW)
-				.requiresCorrectToolForDrops()
-				.strength(Blocks.SNOW.defaultDestroyTime(), Blocks.SNOW.getExplosionResistance())
-				.sound(SoundType.SNOW)))
-				.nonReplaceable()
+		super(SchnowyBlockInterface.notReplaceableHack(Properties.copy(Blocks.SNOW)
+			.requiresCorrectToolForDrops()
+			.strength(Blocks.SNOW.defaultDestroyTime(), Blocks.SNOW.getExplosionResistance())
+			.sound(SoundType.SNOW))
 		);
 		this.parent = parent;
 	}

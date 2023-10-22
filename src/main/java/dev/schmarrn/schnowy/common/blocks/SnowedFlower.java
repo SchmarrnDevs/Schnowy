@@ -1,6 +1,5 @@
 package dev.schmarrn.schnowy.common.blocks;
 
-import dev.schmarrn.schnowy.common.duck.BlockPropertiesDuck;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
@@ -42,11 +41,10 @@ public class SnowedFlower extends FlowerBlock implements SchnowyBlockInterface {
 		super(
 				parent.getSuspiciousEffect(),
 				parent.getEffectDuration(),
-				((BlockPropertiesDuck) (Properties.copy(Blocks.SNOW)
+				SchnowyBlockInterface.notReplaceableHack(Properties.copy(Blocks.SNOW)
 					.requiresCorrectToolForDrops()
 					.strength(Blocks.SNOW.defaultDestroyTime(), Blocks.SNOW.getExplosionResistance())
-					.sound(SoundType.SNOW)))
-					.nonReplaceable()
+					.sound(SoundType.SNOW))
 		);
 		this.parent = parent;
 	}
