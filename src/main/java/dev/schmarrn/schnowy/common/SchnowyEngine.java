@@ -69,7 +69,7 @@ public class SchnowyEngine {
 		}
 
 		// if we can accumulate snow (this block isn't powder snow), then put a snow layer on top of it
-		boolean canAccumulate = !level.getBlockState(pos).is(Blocks.POWDEeR_SNOW);
+		boolean canAccumulate = !level.getBlockState(pos).is(Blocks.POWDER_SNOW);
 		if (canAccumulate && Blocks.SNOW.defaultBlockState().canSurvive(level, pos.above())) {
 			// Check if above block has a snowed variant (should fix fence problem
 			BlockState newState = ReplaceableBlocks.withSnow(level.getBlockState(pos.above()));
