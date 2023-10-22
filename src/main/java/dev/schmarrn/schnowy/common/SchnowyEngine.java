@@ -1,5 +1,6 @@
 package dev.schmarrn.schnowy.common;
 
+import dev.schmarrn.schnowy.common.blocks.SchnowyBlockInterface;
 import dev.schmarrn.schnowy.common.blocks.SchnowyProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -36,13 +37,12 @@ public class SchnowyEngine {
 		// stacking snow
 		if (state.hasProperty(SnowLayerBlock.LAYERS)) {
 			// Normal Snow Layers, Snowed Flowers, Snowed Grass
-			// If we got Layers, increment them - if full, make it a snow block or powder snow if high enough
+			// If we got Layers, increment them - if at max height, do nothing
 			int newLayerCount = state.getValue(SnowLayerBlock.LAYERS) + 1;
 			if (state.is(Blocks.SNOW) && newLayerCount >= 8) {
 				if (isSnowAtMaxHeight(level, pos) || level.getBlockState(pos.below()).is(BlockTags.LEAVES)) {
-					return Optional.of(new SnowPlacementInfo(Blocks.POWDER_SNOW.defaultBlockState(), pos));
+					return Optional.empty();
 				}
-				return Optional.of(new SnowPlacementInfo(Blocks.SNOW_BLOCK.defaultBlockState(), pos));
 			}
 			if (newLayerCount <= 8) {
 				return Optional.of(new SnowPlacementInfo(state.setValue(SnowLayerBlock.LAYERS, newLayerCount), pos));
@@ -58,7 +58,13 @@ public class SchnowyEngine {
 			// Get the snowed equivalent of the block
 			BlockState newState = ReplaceableBlocks.withSnow(state);
 			if (newState != null) {
-				return Optional.of(new SnowPlacementInfo(newState, pos));
+				if (newState.getBlock() instanceof SchnowyBlockInterface sbi) {
+					if (sbi.canLog(level, pos)) {
+						return Optional.of(new SnowPlacementInfo(newState, pos));
+					} else {
+						return Optional.empty();
+					}
+				}
 			}
 		}
 

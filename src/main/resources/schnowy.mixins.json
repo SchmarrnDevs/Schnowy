@@ -8,6 +8,7 @@
     "BeeMixin",
     "BeePollinateGoalMixin",
     "BiomeMixin",
+    "BlockPropertiesMixin",
     "EnchantmentHelperMixin",
     "ServerLevelMixin",
     "SnowAndFreezeFeatureMixin",
