@@ -10,6 +10,7 @@
     "BiomeMixin",
     "BlockPropertiesMixin",
     "EnchantmentHelperMixin",
+    "FenceBlockMixin",
     "ServerLevelMixin",
     "SnowAndFreezeFeatureMixin",
     "SnowLayerBlockMixin"
