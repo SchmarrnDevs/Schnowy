@@ -10,6 +10,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -53,6 +54,11 @@ public class SnowedFence extends FenceBlock implements SchnowyBlockInterface {
 	@Override
 	protected void spawnDestroyParticles(Level world, Player player, BlockPos pos, BlockState state) {
 		super.spawnDestroyParticles(world, player, pos, Blocks.SNOW.defaultBlockState());
+	}
+
+	@Override
+	public boolean canPlaceLiquid(BlockGetter world, BlockPos pos, BlockState state, Fluid fluid) {
+		return false;
 	}
 
 	@Override
