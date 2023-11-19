@@ -28,5 +28,10 @@ public class SchnowyTagProvider extends FabricTagProvider.BlockTagProvider {
 			.add(SchnowyBlocks.FENCES.values().toArray(Block[]::new));
 		getOrCreateTagBuilder(BlockTags.WOODEN_FENCES)
 			.add(SchnowyBlocks.FENCES.values().toArray(Block[]::new));
+		getOrCreateTagBuilder(BlockTags.SNOW)
+			.add(SchnowyBlocks.FLOWERS.values().toArray(Block[]::new))
+			.add(SchnowyBlocks.FENCES.values().toArray(Block[]::new))
+			.add(SchnowyBlocks.SNOWED_GRASS.values().toArray(Block[]::new))
+			.add(SchnowyBlocks.SNOWED_DEAD_BUSH);
 	}
 }

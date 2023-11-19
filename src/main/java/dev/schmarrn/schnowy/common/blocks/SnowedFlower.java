@@ -41,7 +41,8 @@ public class SnowedFlower extends FlowerBlock implements SchnowyBlockInterface {
 		super(
 				parent.getSuspiciousEffect(),
 				parent.getEffectDuration(),
-				SchnowyBlockInterface.notReplaceableHack(Properties.copy(Blocks.SNOW)
+				SchnowyBlockInterface.notReplaceableHack(Properties.copy(parent)
+					.offsetType(OffsetType.NONE)
 					.requiresCorrectToolForDrops()
 					.strength(Blocks.SNOW.defaultDestroyTime(), Blocks.SNOW.getExplosionResistance())
 					.sound(SoundType.SNOW))

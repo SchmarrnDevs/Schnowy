@@ -42,6 +42,8 @@ public class SchnowyEngine {
 			if (state.is(Blocks.SNOW) && newLayerCount >= 8) {
 				if (isSnowAtMaxHeight(level, pos) || level.getBlockState(pos.below()).is(BlockTags.LEAVES)) {
 					return Optional.empty();
+					// if we want powder snow at top again
+					//return Optional.of(new SnowPlacementInfo(Blocks.POWDER_SNOW.defaultBlockState(), pos));
 				}
 			}
 			if (newLayerCount <= 8) {

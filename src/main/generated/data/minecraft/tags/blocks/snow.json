@@ -1,0 +1,33 @@
+{
+  "replace": false,
+  "values": [
+    "schnowy:snowed_dandelion",
+    "schnowy:snowed_poppy",
+    "schnowy:snowed_oxeye_daisy",
+    "schnowy:snowed_white_tulip",
+    "schnowy:snowed_blue_orchid",
+    "schnowy:snowed_allium",
+    "schnowy:snowed_lily_of_the_valley",
+    "schnowy:snowed_orange_tulip",
+    "schnowy:snowed_wither_rose",
+    "schnowy:snowed_red_tulip",
+    "schnowy:snowed_cornflower",
+    "schnowy:snowed_azure_bluet",
+    "schnowy:snowed_pink_tulip",
+    "schnowy:snowed_torchflower",
+    "schnowy:snowed_dark_oak_fence",
+    "schnowy:snowed_warped_fence",
+    "schnowy:snowed_crimson_fence",
+    "schnowy:snowed_jungle_fence",
+    "schnowy:snowed_oak_fence",
+    "schnowy:snowed_spruce_fence",
+    "schnowy:snowed_mangrove_fence",
+    "schnowy:snowed_birch_fence",
+    "schnowy:snowed_cherry_fence",
+    "schnowy:snowed_acacia_fence",
+    "schnowy:snowed_nether_brick_fence",
+    "schnowy:snowed_grass",
+    "schnowy:snowed_fern",
+    "schnowy:snowed_dead_bush"
+  ]
+}

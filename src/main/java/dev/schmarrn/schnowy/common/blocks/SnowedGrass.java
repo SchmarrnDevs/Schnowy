@@ -40,7 +40,8 @@ public class SnowedGrass extends TallGrassBlock implements SchnowyBlockInterface
 	public final TallGrassBlock parent;
 
 	public SnowedGrass(TallGrassBlock parent) {
-		super(SchnowyBlockInterface.notReplaceableHack(Properties.copy(Blocks.SNOW)
+		super(SchnowyBlockInterface.notReplaceableHack(Properties.copy(parent)
+			.offsetType(OffsetType.NONE)
 			.requiresCorrectToolForDrops()
 			.strength(Blocks.SNOW.defaultDestroyTime(), Blocks.SNOW.getExplosionResistance())
 			.sound(SoundType.SNOW))

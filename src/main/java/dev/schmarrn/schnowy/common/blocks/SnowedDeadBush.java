@@ -35,7 +35,8 @@ public class SnowedDeadBush extends DeadBushBlock implements SchnowyBlockInterfa
 	});
 
 	public SnowedDeadBush() {
-		super(SchnowyBlockInterface.notReplaceableHack(Properties.copy(Blocks.SNOW)
+		super(SchnowyBlockInterface.notReplaceableHack(Properties.copy(Blocks.DEAD_BUSH)
+			.offsetType(OffsetType.NONE)
 			.requiresCorrectToolForDrops()
 			.strength(Blocks.SNOW.defaultDestroyTime(), Blocks.SNOW.getExplosionResistance())
 			.sound(SoundType.SNOW)));
