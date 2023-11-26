@@ -1,9 +1,15 @@
 package dev.schmarrn.schnowy.common.blocks;
 
+import dev.schmarrn.schnowy.common.FallingSnowUtil;
+import dev.schmarrn.schnowy.common.ReplaceableBlocks;
+import dev.schmarrn.schnowy.common.SchnowyEngine;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -54,6 +60,23 @@ public class SnowedFence extends FenceBlock implements SchnowyBlockInterface {
 	@Override
 	protected void spawnDestroyParticles(Level world, Player player, BlockPos pos, BlockState state) {
 		super.spawnDestroyParticles(world, player, pos, Blocks.SNOW.defaultBlockState());
+	}
+
+	@Override
+	public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor world, BlockPos pos, BlockPos neighborPos) {
+		BlockState fallen = FallingSnowUtil.updateShape(state, direction, neighborState, world, pos, neighborPos, parent);
+
+		if (fallen == null) {
+			return super.updateShape(state, direction, neighborState, world, pos, neighborPos);
+		} else {
+			return fallen;
+		}
+	}
+
+	@Override
+	public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
+		BlockState blockState = world.getBlockState(pos.below());
+		return SchnowyEngine.isFullSnowLogged(blockState) || Blocks.SNOW.canSurvive(state, world, pos);
 	}
 
 	@Override

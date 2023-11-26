@@ -84,7 +84,7 @@ public class SchnowyBlocks {
 	}
 
 	public static void createFence(Block fence, Block textureParent) {
-		SnowedFence slab = new SnowedFence(textureParent);
+		SnowedFence slab = new SnowedFence(fence);
 		FENCES.put(fence, slab);
 		Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(Schnowy.MODID, "snowed_" + BuiltInRegistries.BLOCK.getKey(fence).getPath()), slab);
 	}
