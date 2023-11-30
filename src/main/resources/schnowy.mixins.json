@@ -13,6 +13,7 @@
     "FenceBlockMixin",
     "ServerLevelMixin",
     "SnowAndFreezeFeatureMixin",
+    "SnowBlockMixin",
     "SnowLayerBlockMixin"
   ],
   "client": [

@@ -161,7 +161,7 @@ public class SchnowyEngine {
 		return Math.floorDiv(-height -1, 8) + 1;
 	}
 
-	private static boolean isSnow(BlockState state) {
+	public static boolean isSnow(BlockState state) {
 		return state.is(Blocks.SNOW_BLOCK)
 				|| state.hasProperty(SnowLayerBlock.LAYERS)
 				|| state.hasProperty(SchnowyProperties.HALF_LAYERS)

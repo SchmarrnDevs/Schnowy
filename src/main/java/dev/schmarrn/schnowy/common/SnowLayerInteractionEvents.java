@@ -66,7 +66,7 @@ public class SnowLayerInteractionEvents implements PlayerBlockBreakEvents.Before
 			} else {
 				placedState = state.setValue(layerProperty, layers - 1 - snowClearingLevel);
 			}
-			if (placedState != null) {
+			if (placedState != null && placedState.canSurvive(world, pos)) {
 				world.setBlock(pos, placedState, Block.UPDATE_ALL);
 			} else {
 				world.setBlock(pos, Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL);
