@@ -5,8 +5,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -17,7 +17,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SnowedDeadBush extends DeadBushBlock {
+public class SnowedDeadBush extends DeadBushBlock implements SchnowyBlockInterface {
 	public static final Map<Integer, VoxelShape> shapes = Util.make(() -> {
 		Map<Integer, VoxelShape> shapes = new HashMap<>();
 		for (int i = 1; i <= 8; i++) {
@@ -35,11 +35,11 @@ public class SnowedDeadBush extends DeadBushBlock {
 	});
 
 	public SnowedDeadBush() {
-		super(BlockBehaviour.Properties.copy(Blocks.SNOW)
-				.requiresCorrectToolForDrops()
-				.strength(Blocks.SNOW.defaultDestroyTime(), Blocks.SNOW.getExplosionResistance())
-				.sound(SoundType.SNOW)
-		);
+		super(SchnowyBlockInterface.notReplaceableHack(Properties.copy(Blocks.DEAD_BUSH)
+			.offsetType(OffsetType.NONE)
+			.requiresCorrectToolForDrops()
+			.strength(Blocks.SNOW.defaultDestroyTime(), Blocks.SNOW.getExplosionResistance())
+			.sound(SoundType.SNOW)));
 	}
 
 	@Override
@@ -74,5 +74,10 @@ public class SnowedDeadBush extends DeadBushBlock {
 	@Override
 	protected void spawnDestroyParticles(Level world, Player player, BlockPos pos, BlockState state) {
 		super.spawnDestroyParticles(world, player, pos, Blocks.SNOW.defaultBlockState());
+	}
+
+	@Override
+	public boolean canLog(LevelReader level, BlockPos pos) {
+		return true;
 	}
 }

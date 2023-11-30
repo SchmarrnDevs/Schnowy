@@ -8,9 +8,12 @@
     "BeeMixin",
     "BeePollinateGoalMixin",
     "BiomeMixin",
+    "BlockPropertiesMixin",
     "EnchantmentHelperMixin",
+    "FenceBlockMixin",
     "ServerLevelMixin",
     "SnowAndFreezeFeatureMixin",
+    "SnowBlockMixin",
     "SnowLayerBlockMixin"
   ],
   "client": [

@@ -78,13 +78,13 @@ public class SchnowyBlocks {
 		Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(Schnowy.MODID, "snowed_" + BuiltInRegistries.BLOCK.getKey(slabReplacement).getPath()), slab);
 	}
 	public static void createStair(Block stair, Block fullBlock) {
-		SnowedStair snowedStair = new SnowedStair(textureRedirects.getOrDefault(fullBlock, fullBlock));
+		SnowedStair snowedStair = new SnowedStair(fullBlock, textureRedirects.getOrDefault(fullBlock, fullBlock));
 		STAIRS.put(stair, snowedStair);
 		Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(Schnowy.MODID, "snowed_" + BuiltInRegistries.BLOCK.getKey(stair).getPath()), snowedStair);
 	}
 
 	public static void createFence(Block fence, Block textureParent) {
-		SnowedFence slab = new SnowedFence(textureParent);
+		SnowedFence slab = new SnowedFence(fence);
 		FENCES.put(fence, slab);
 		Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(Schnowy.MODID, "snowed_" + BuiltInRegistries.BLOCK.getKey(fence).getPath()), slab);
 	}

@@ -5,6 +5,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
@@ -16,7 +17,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SnowedSlab extends Block {
+public class SnowedSlab extends Block implements SchnowyBlockInterface {
 
 	public static final Map<Integer, VoxelShape> shapes = Util.make(() -> {
 		Map<Integer, VoxelShape> shapes = new HashMap<>();
@@ -52,5 +53,10 @@ public class SnowedSlab extends Block {
 	@Override
 	protected void spawnDestroyParticles(Level world, Player player, BlockPos pos, BlockState state) {
 		super.spawnDestroyParticles(world, player, pos, Blocks.SNOW.defaultBlockState());
+	}
+
+	@Override
+	public boolean canLog(LevelReader level, BlockPos pos) {
+		return true;
 	}
 }

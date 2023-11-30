@@ -1,5 +1,6 @@
 package dev.schmarrn.schnowy.common;
 
+import dev.schmarrn.schnowy.common.blocks.SchnowyBlockInterface;
 import dev.schmarrn.schnowy.common.blocks.SchnowyProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -36,13 +37,14 @@ public class SchnowyEngine {
 		// stacking snow
 		if (state.hasProperty(SnowLayerBlock.LAYERS)) {
 			// Normal Snow Layers, Snowed Flowers, Snowed Grass
-			// If we got Layers, increment them - if full, make it a snow block or powder snow if high enough
+			// If we got Layers, increment them - if at max height, do nothing
 			int newLayerCount = state.getValue(SnowLayerBlock.LAYERS) + 1;
 			if (state.is(Blocks.SNOW) && newLayerCount >= 8) {
 				if (isSnowAtMaxHeight(level, pos) || level.getBlockState(pos.below()).is(BlockTags.LEAVES)) {
-					return Optional.of(new SnowPlacementInfo(Blocks.POWDER_SNOW.defaultBlockState(), pos));
+					return Optional.empty();
+					// if we want powder snow at top again
+					//return Optional.of(new SnowPlacementInfo(Blocks.POWDER_SNOW.defaultBlockState(), pos));
 				}
-				return Optional.of(new SnowPlacementInfo(Blocks.SNOW_BLOCK.defaultBlockState(), pos));
 			}
 			if (newLayerCount <= 8) {
 				return Optional.of(new SnowPlacementInfo(state.setValue(SnowLayerBlock.LAYERS, newLayerCount), pos));
@@ -58,13 +60,30 @@ public class SchnowyEngine {
 			// Get the snowed equivalent of the block
 			BlockState newState = ReplaceableBlocks.withSnow(state);
 			if (newState != null) {
-				return Optional.of(new SnowPlacementInfo(newState, pos));
+				if (newState.getBlock() instanceof SchnowyBlockInterface sbi) {
+					if (sbi.canLog(level, pos)) {
+						return Optional.of(new SnowPlacementInfo(newState, pos));
+					} else {
+						return Optional.empty();
+					}
+				}
 			}
 		}
 
 		// if we can accumulate snow (this block isn't powder snow), then put a snow layer on top of it
 		boolean canAccumulate = !level.getBlockState(pos).is(Blocks.POWDER_SNOW);
-		if (canAccumulate && Blocks.SNOW.canSurvive(Blocks.SNOW.defaultBlockState(), level, pos.above())) {
+		if (canAccumulate && Blocks.SNOW.defaultBlockState().canSurvive(level, pos.above())) {
+			// Check if above block has a snowed variant (should fix fence problem
+			BlockState newState = ReplaceableBlocks.withSnow(level.getBlockState(pos.above()));
+			if (newState != null) {
+				if (newState.getBlock() instanceof SchnowyBlockInterface sbi) {
+					if (sbi.canLog(level, pos.above())) {
+						return Optional.of(new SnowPlacementInfo(newState, pos.above()));
+					} else {
+						return Optional.empty();
+					}
+				}
+			}
 			return Optional.of(new SnowPlacementInfo(Blocks.SNOW.defaultBlockState(), pos.above()));
 		}
 
@@ -142,7 +161,7 @@ public class SchnowyEngine {
 		return Math.floorDiv(-height -1, 8) + 1;
 	}
 
-	private static boolean isSnow(BlockState state) {
+	public static boolean isSnow(BlockState state) {
 		return state.is(Blocks.SNOW_BLOCK)
 				|| state.hasProperty(SnowLayerBlock.LAYERS)
 				|| state.hasProperty(SchnowyProperties.HALF_LAYERS)

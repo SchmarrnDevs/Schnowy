@@ -2,6 +2,7 @@ package dev.schmarrn.schnowy.common.blocks;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
@@ -13,13 +14,13 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class SnowedStair extends StairBlock {
+public class SnowedStair extends StairBlock implements SchnowyBlockInterface {
 
 	public final Block textureParent;
-	public SnowedStair(Block textureParent) {
+	public SnowedStair(Block parent, Block textureParent) {
 		super(
 				textureParent.defaultBlockState(),
-				BlockBehaviour.Properties.copy(Blocks.SNOW)
+				BlockBehaviour.Properties.copy(parent)
 						.requiresCorrectToolForDrops()
 						.strength(Blocks.SNOW.defaultDestroyTime(), Blocks.SNOW.getExplosionResistance())
 						.sound(SoundType.SNOW)
@@ -37,5 +38,10 @@ public class SnowedStair extends StairBlock {
 	@Override
 	public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
 		return Shapes.or(super.getShape(state, world, pos, context), box(0, 8, 0, 16, 8 + 2*state.getValue(SchnowyProperties.HALF_LAYERS), 16));
+	}
+
+	@Override
+	public boolean canLog(LevelReader level, BlockPos pos) {
+		return true;
 	}
 }

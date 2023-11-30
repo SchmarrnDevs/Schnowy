@@ -1,6 +1,7 @@
 package dev.schmarrn.schnowy.mixin;
 
 import dev.schmarrn.schnowy.common.ReplaceableBlocks;
+import dev.schmarrn.schnowy.common.blocks.SchnowyBlockInterface;
 import dev.schmarrn.schnowy.common.blocks.SchnowyBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.LevelReader;
@@ -37,6 +38,11 @@ public class SnowAndFreezeFeatureMixin {
 		if (world instanceof WorldGenLevel level && instance.shouldSnow(world, blockPos)) {
 			@Nullable BlockState stateWithSnow = ReplaceableBlocks.withSnow(level.getBlockState(blockPos));
 			if (stateWithSnow != null) {
+				if (stateWithSnow.getBlock() instanceof SchnowyBlockInterface sbi) {
+					if (!sbi.canLog(world, blockPos)) {
+						return false;
+					}
+				}
 				level.setBlock(blockPos, stateWithSnow, 2);
 				BlockState belowState = level.getBlockState(blockPos.below());
 				if (belowState.hasProperty(SnowyDirtBlock.SNOWY)) {
